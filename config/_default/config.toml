@@ -2,7 +2,6 @@ baseURL = "https://836108186.github.io/blog/"
 languageCode = "en"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
-#触发测试4
 [languages]
   [languages.en]
     languageName = "English"
