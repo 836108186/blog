@@ -2,7 +2,7 @@ baseURL = "https://example.com/"
 languageCode = "en"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
-#触发测试
+#触发测试2
 [languages]
   [languages.en]
     languageName = "English"
