@@ -1,0 +1,21 @@
+baseURL = "https://example.com/"
+languageCode = "zh-cn"
+title = "WJ-中文"
+theme = "hugo-theme-stack"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "WJ-English"
+    weight = 1
+    [languages.en.params.sidebar]
+      emoji = "🍥"
+      subtitle = "Unity of Knowledge and Action"
+    
+  [languages.zh-cn]
+    languageName = "简体中文"
+    title = "WJ-中文"
+    weight = 2
+    [languages.zh-cn.params.sidebar]
+      emoji = "🍥"
+      subtitle = "知行合一"
