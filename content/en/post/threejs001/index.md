@@ -1,85 +1,84 @@
 ---
-title: Three.js：你的3D世界
-description: Three.js 是一个 3D JavaScript 库，它可以帮助你为网络创造3D体验，而且非常容易使用。如果你想让你的网站更加炫酷，那么 Three.js 一定是你的好帮手。
+title: Three.js:Your Gateway to 3D Worlds
+description: Three.js is a 3D JavaScript library that empowers you to create 3D experiences on the web with ease. If you want to make your website more eye-catching, Three.js is your ideal companion.
 slug: threejs001
 date: 2024-12-27
 image: cover.png
 categories:
-    - 3D
-    - three.js
+  - 3D
+  - three.js
 tags:
-    - three.js
-weight: 1       # You can add weight to some posts to override the default sorting (date descending)
+  - three.js
+weight: 1
 ---
 
-## **什么是 Three.js？**
+## **What is Three.js**?
 
-Three.js 是一个 3D JavaScript 库，它可以帮助你为网络创造3D体验，而且非常容易使用。如果你想让你的网站更加炫酷，那么 Three.js 一定是你的好帮手。
+Three.js is a 3D JavaScript library that enables you to create 3D experiences on the web with ease. If you want to make your website more eye-catching, Three.js is your ideal companion.
 
-Three.js 是一个在 MIT 许可下的 JavaScript 库，它在 WebGL 之上运行。这个库的目标就是简化处理3D内容的过程。只需要几行代码，你就可以获得一个动画3D场景，而且你无需了解复杂的着色器和矩阵。
+Three.js is a JavaScript library released under the MIT license that runs on top of WebGL. The goal of this library is to simplify the process of handling 3D content. With just a few lines of code, you can obtain an animated 3D scene without needing to understand complex shaders and matrices.
 
-## **什么是 WebGL？**
+## **What is WebGL**?
 
-WebGL 是一种 JavaScript API，它可以在画布中呈现三角形，而且速度非常快，因为它使用访问者的图形处理单元 (GPU)。GPU 可以进行数千次并行计算，这让我们可以在3D场景中进行复杂的运算。然而，尽管 WebGL 在处理3D场景方面非常出色，但仍然有一些缺点。例如，如果你想要创建一个复杂的场景，你需要掌握一些高级技巧，这可能对于初学者来说非常困难。此外，WebGL 也需要高性能的硬件来运行，因为它需要大量的计算资源。因此，如果你的计算机性能不足，那么使用 WebGL 可能会导致你的应用程序运行缓慢或崩溃。
+WebGL is a JavaScript API that allows you to render triangles in a canvas at high speed, as it utilizes the visitor's graphics processing unit (GPU). The GPU can perform thousands of parallel computations, enabling complex calculations within a 3D scene. However, despite its excellent performance in handling 3D scenes, WebGL still has some drawbacks. For example, if you want to create a complex scene, you need to master some advanced techniques, which can be challenging for beginners. Additionally, WebGL requires high-performance hardware to run, as it consumes significant computing resources. Therefore, if your computer has insufficient performance, using WebGL may cause your application to run slowly or crash.
 
-原生 WebGL 非常困难，因为你需要手动写很多代码。但是 Three.js 消除了这个障碍，让你可以轻松创建3D场景。除了 Three.js 之外，还有其他一些工具可以帮助您更轻松地创建3D场景，例如 Babylon.js 和 A-Frame。这些工具提供了各种各样的功能，从简单的场景到复杂的虚拟现实体验。因此，如果您想要创建一个3D应用程序，您可以考虑使用这些工具来简化开发流程。
+Native WebGL is very difficult because you need to write a lot of code manually. However, Three.js eliminates this barrier, allowing you to easily create 3D scenes. Apart from Three.js, there are other tools that can help you create 3D scenes more easily, such as Babylon.js and A-Frame. These tools offer a variety of features, ranging from simple scenes to complex virtual reality experiences. Therefore, if you want to create a 3D application, you can consider using these tools to simplify the development process.
 
-## **Three.js 的运行需要4个条件**
+## **Four conditions required for Three.js to run**
 
-- 场景 (scenes)
-- 渲染器 (renderers)
-- 相机 (cameras)
-- 对象 (objects)
+- Scenes (scenes)
+- Renderers (renderers)
+- Cameras (cameras)
+- Objects (objects)
 
-## **什么是场景？**
+## **What is a scene**?
 
-在 Three.js 中，场景是一个非常重要的概念。它类似于一个容器或者说世界，可以包含各种对象、模型、粒子和灯光等。场景是 Three.js 中的一个核心组件，它是构建一个 3D 场景所必需的。通过将不同的对象添加到场景中，我们可以创建一个复杂的 3D 环境，从而实现更加生动、吸引人的 3D 体验。
+In Three.js, a scene is a crucial concept. It is similar to a container or a world that can hold various objects, models, particles, and lights. The scene is a core component in Three.js and is essential for building a 3D scene. By adding different objects to the scene, we can create a complex 3D environment, thereby achieving a more vivid and engaging 3D experience.
 
-## **什么是渲染器？**
+## **What is a renderer**?
 
-渲染器是一个非常重要的组件，它的工作是将我们的代码与设计渲染到我们的web中。在threejs中，我们通常使用 [WebGLRenderer](https://threejs.org/docs/index.html#api/en/renderers/WebGLRenderer) 类来进行渲染。WebGL是一种3D绘图标准，它允许我们在web上呈现复杂的3D图形，而不需要插件，这是非常棒的。 WebGLRenderer的一个伟大之处在于它提供了丰富的功能，例如对材质、灯光、阴影和反射的支持。这使得我们能够创建出更加逼真的场景和模型，从而提高用户体验。总之，渲染器是任何三维场景的重要组成部分，也是threejs中不可或缺的组件。
+A renderer is a crucial component that renders our code and design into our web. In Three.js, we typically use the [WebGLRenderer](https://threejs.org/docs/index.html#api/en/renderers/WebGLRenderer) class for rendering. WebGL is a 3D graphics standard that allows us to render complex 3D graphics on the web without the need for plugins, which is fantastic. One of the great things about WebGLRenderer is that it provides rich features, such as support for materials, lights, shadows, and reflections. This enables us to create more realistic scenes and models, thereby enhancing the user experience. In summary, a renderer is an essential part of any 3D scene and is indispensable in Three.js.
 
-## **什么是对象？**
+## **What are objects**?
 
-在 Three.js 中，所有的元素都是对象，包括几何体、模型、粒子和灯光等。这些对象可以应用不同的材质和纹理，并使用相机和光源进行渲染。 Three.js 还提供了许多扩展和库，例如 MeshStandardMaterial 和 dat.gui，可以让你创建更高级的渲染效果和用户界面。
+In Three.js, all elements are objects, including geometries, models, particles, and lights. These objects can apply different materials and textures and be rendered using cameras and lights. Three.js also provides many extensions and libraries, such as MeshStandardMaterial and dat.gui, which allow you to create more advanced rendering effects and user interfaces.
 
-## **什么是相机？**
+## **What is a camera**?
 
-在 Three.js 中，相机是非常重要的一个元素，用来决定我们观察场景的角度和位置。相机被用来模拟人眼对场景的观察，因此非常重要。在 Three.js 中，创建相机非常简单，我们可以使用 [PerspectiveCamera](https://threejs.org/docs/index.html#api/en/cameras/PerspectiveCamera) 类来创建。这个类允许我们设置许多参数，例如视角、宽高比、近截面和远截面等等，因此我们可以完全控制相机的行为。
+In Three.js, the camera is a crucial element that determines the angle and position from which we observe the scene. The camera simulates the human eye's observation of the scene and is therefore very important. Creating a camera in Three.js is very simple. We can use the [PerspectiveCamera](https://threejs.org/docs/index.html#api/en/cameras/PerspectiveCamera) class to create a camera. This class allows us to set many parameters, such as the field of view, aspect ratio, near plane, and far plane, thus giving us full control over the camera's behavior.
 
-另外，在 Three.js 中，相机本身是不可见的，它仅用于计算和确定场景中物体的位置和角度。因此，我们只能看到相机所观察到的内容，而不能看到相机本身。这意味着，我们需要在场景中加入其他可见的对象，例如物体、灯光等等，才能看到场景。因此，在使用 Three.js 时，不仅需要了解相机的使用，还需要了解如何创建和操作其他类型的对象。
+Additionally, in Three.js, the camera itself is invisible. It is only used for calculation and determining the position and angle of objects in the scene. Therefore, we can only see the content observed by the camera and not the camera itself. This means that we need to add other visible objects to the scene, such as objects and lights, to see the scene. Therefore, when using Three.js, we not only need to understand the use of the camera but also how to create and operate other types of objects.
 
 > PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
- fov — 摄像机视锥体垂直视野角度 aspect — 摄像机视锥体长宽比 near — 摄像机视锥体近端面 far — 摄像机视锥体远端面
-> 
+ fov — Vertical field of view angle of the camera frustum aspect — Aspect ratio of the camera frustum near — Near plane of the camera frustum far — Far plane of the camera frustum
 
-在Three.js中，我们可以拥有多个相机，但通常情况下只需要一个。
+In Three.js, we can have multiple cameras, but usually, only one is needed.
 
-相机在Three.js中类似于一个锥形体，它受到视野范围和纵横比的影响。
+The camera in Three.js is similar to a cone, and it is influenced by the field of view and aspect ratio.
 
-**视野范围：**
+**Field of View**:
 
-视野是你的视角有多大。如果你使用一个非常大的角度，你将能够同时看到各个方向，但会失真很多，因为结果将绘制在一个小矩形上。如果使用小角度，则物体看起来会被放大。
+The field of view is how large your perspective is. If you use a very large angle, you will be able to see in all directions at the same time, but there will be a lot of distortion because the result will be drawn on a small rectangle. If you use a small angle, the objects will appear magnified.
 
-![视野范围](threejs001-1.jpeg)
+![Field of View](threejs001-1.jpeg)
 
-!https://picx.zhimg.com/80/v2-e23347e6f92de84702ded7ce9684da4a_720w.jpeg?source=d16d100b
+![Field of View](https://picx.zhimg.com/80/v2-e23347e6f92de84702ded7ce9684da4a_720w.jpeg?source=d16d100b)
 
-### **那么如何将渲染到指定的位置呢？**
+### **How do we render to a specific location**?
 
-在这种情况下，我们需要理解笛卡尔坐标系（这个比较难解释，所以这里我们使用图片来解释），通过x，y，z三个坐标轴在三维空间中进行定位。在WebGL与Threejs中使用的是正交右手坐标系：
+In this case, we need to understand Cartesian coordinates (this is difficult to explain, so we use pictures to explain), and locate in three-dimensional space through x, y, and z coordinates. The orthogonal right-hand coordinate system is used in WebGL and Threejs:
 
-- 正交右手坐标系：右手拇指代表X轴，食指代表Y轴，中指代表Z轴。
-- 手臂和拇指代表Y轴。
-- 与地面平行的是Z轴。
-- 拇指代表X轴。
+- Orthogonal right-hand coordinate system: The thumb of the right hand represents the X-axis, the index finger represents the Y-axis, and the middle finger represents the Z-axis.
+- The arm and thumb represent the Y-axis.
+- The Z-axis is parallel to the ground.
+- The thumb represents the X-axis.
 
-!https://picx.zhimg.com/80/v2-9199470f10582861fcddd69714122daa_720w.png?source=d16d100b
+![Cartesian Coordinate System Diagram](https://picx.zhimg.com/80/v2-9199470f10582861fcddd69714122daa_720w.png?source=d16d100b)
 
-**笛卡尔坐标系图示：**
+**Cartesian Coordinate System Diagram**:
 
-!https://picx.zhimg.com/80/v2-9014d3e39bc706cd29bc41685054ae0d_720w.jpeg?source=d16d100b
+![Cartesian Coordinate System Diagram](https://picx.zhimg.com/80/v2-9014d3e39bc706cd29bc41685054ae0d_720w.jpeg?source=d16d100b)
 
-## **结尾**
+## **Conclusion**
 
-以上就是 Three.js 渲染流程的详细解释。了解这个流程对于理解 Three.js 的工作原理非常重要。如果你想要进一步深入学习 Three.js，我建议你查看官方文档和示例，这里有很多有用的信息和代码片段，可以帮助你更好地理解和使用 Three.js。此外，你也可以尝试创建自己的3D场景和模型，这将帮助你更好地掌握 Three.js 的技术和工作原理。希望这篇文章对你有所帮助，谢谢！
+The above is a detailed explanation of the Three.js rendering process. Understanding this process is crucial for comprehending how Three.js works. If you want to delve deeper into Three.js, I recommend checking out the official documentation and examples, which contain a wealth of useful information and code snippets to help you better understand and use Three.js. Additionally, you can try creating your own 3D scenes and models, which will help you master the techniques and principles of Three.js. I hope this article is helpful to you, thank you!
