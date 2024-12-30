@@ -12,7 +12,7 @@ enableRobotsTXT = true
 [params]
   description = "做自己想做的事情，从新出发，从心出发Follow your heart"
   author = "Follow your heart"
-  keywords = ["blog", "Follow your heart", "study","博客","学习"]
+  keywords = ["blog", "Follow your heart", "study","博客","学习","从心出发"]
   googleAnalytics = "G-RQMNSJDBE2"
   enableGoogleAds = true
   googleAdsScriptSrc = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4851827946087899"
