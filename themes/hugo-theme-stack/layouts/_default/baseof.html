@@ -3,6 +3,9 @@
     <head>
         {{- partial "head/head.html" . -}}
         {{- block "head" . -}}{{ end }}
+        {{ if .Site.Params.enableGoogleAds }}
+        <script async src="{{ .Site.Params.googleAdsScriptSrc }}" crossorigin="anonymous"></script>
+        {{ end }}
     </head>
     <body class="{{ block `body-class` . }}{{ end }}">
         {{- partial "head/colorScheme" . -}}

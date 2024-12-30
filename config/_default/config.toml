@@ -1,5 +1,6 @@
 baseURL = "https://betterthantomorrow.top/"
 languageCode = "en"
+title = "Fllow your heart"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
 
@@ -13,6 +14,8 @@ defaultContentLanguage = "en"
   author = "Follow your heart"
   keywords = ["blog", "Follow your heart", "study","博客","学习"]
   googleAnalytics = "G-RQMNSJDBE2"
+  enableGoogleAds = true
+  googleAdsScriptSrc = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4851827946087899"
   [params.Author]
     name = "Your Name"
     email = "your-email@example.com"
