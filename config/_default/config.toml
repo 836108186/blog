@@ -2,6 +2,18 @@ baseURL = "https://betterthantomorrow.top/"
 languageCode = "en"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[params]
+  description = "做自己想做的事情，从新出发，从心出发Follow your heart"
+  author = "Follow your heart"
+  keywords = ["blog", "Follow your heart", "study","博客","学习"]
+  googleAnalytics = "G-CRJBCH6L08"
+
 [languages]
   [languages.en]
     languageName = "English"
