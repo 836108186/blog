@@ -13,7 +13,9 @@ defaultContentLanguage = "en"
   author = "Follow your heart"
   keywords = ["blog", "Follow your heart", "study","博客","学习"]
   googleAnalytics = "G-CRJBCH6L08"
-
+  [params.Author]
+    name = "Your Name"
+    email = "your-email@example.com"
 [languages]
   [languages.en]
     languageName = "English"
