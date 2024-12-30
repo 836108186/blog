@@ -13,7 +13,7 @@ defaultContentLanguage = "en"
   author = "Follow your heart"
   keywords = ["blog", "Follow your heart", "study","博客","学习"]
   googleAnalytics = "G-CRJBCH6L08"
-
+# 1
 [languages]
   [languages.en]
     languageName = "English"
