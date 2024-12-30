@@ -3,7 +3,7 @@ title: Three.js:Your Gateway to 3D Worlds
 description: Three.js is a 3D JavaScript library that empowers you to create 3D experiences on the web with ease. If you want to make your website more eye-catching, Three.js is your ideal companion.
 slug: threejs001
 date: 2024-12-27
-image: cover.png
+image: cover.jpg
 categories:
   - 3D
   - three.js
@@ -60,9 +60,8 @@ The camera in Three.js is similar to a cone, and it is influenced by the field o
 
 The field of view is how large your perspective is. If you use a very large angle, you will be able to see in all directions at the same time, but there will be a lot of distortion because the result will be drawn on a small rectangle. If you use a small angle, the objects will appear magnified.
 
-![Field of View](threejs001-1.jpeg)
-
-![Field of View](https://picx.zhimg.com/80/v2-e23347e6f92de84702ded7ce9684da4a_720w.jpeg?source=d16d100b)
+![视野范围](threejs001-1.jpeg)
+![视野范围](threejs001-2.jpeg)
 
 ### **How do we render to a specific location**?
 
@@ -73,11 +72,10 @@ In this case, we need to understand Cartesian coordinates (this is difficult to 
 - The Z-axis is parallel to the ground.
 - The thumb represents the X-axis.
 
-![Cartesian Coordinate System Diagram](https://picx.zhimg.com/80/v2-9199470f10582861fcddd69714122daa_720w.png?source=d16d100b)
+![视野范围](threejs001-3.jpeg)
 
 **Cartesian Coordinate System Diagram**:
-
-![Cartesian Coordinate System Diagram](https://picx.zhimg.com/80/v2-9014d3e39bc706cd29bc41685054ae0d_720w.jpeg?source=d16d100b)
+![视野范围](threejs001-4.jpeg)
 
 ## **Conclusion**
 
