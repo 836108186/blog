@@ -3,7 +3,7 @@ languageCode = "en"
 title = "Fllow your heart"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
-
+enableRobotsTXT = true
 [sitemap]
   changefreq = "weekly"
   priority = 0.5

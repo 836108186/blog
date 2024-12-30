@@ -2,6 +2,7 @@ baseURL = "https://betterthantomorrow.top/"
 languageCode = "zh-cn"
 title = "Fllow your heart"
 theme = "hugo-theme-stack"
+enableRobotsTXT = true
 
 [sitemap]
   changefreq = "weekly"
@@ -35,3 +36,4 @@ theme = "hugo-theme-stack"
     [languages.zh-cn.params.sidebar]
       emoji = "🍥"
       subtitle = "知行合一"
+
