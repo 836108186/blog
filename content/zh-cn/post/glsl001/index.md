@@ -100,7 +100,7 @@ weight: 1       # You can add weight to some posts to override the default sorti
 
 ### 16进制转换rgb颜色
 
-![glsl001](glsl001)
+![glsl001](glsl001.png)
 
 。在计算机编程的上下文中，十六进制是一种基于16的数字系统，使用数字0-9和字母A-F来表示值。在这种情况下，"0xFF0000"表示RGB格式中的红色，前两个数字表示红色通道值，接下来两个数字表示绿色通道值，最后两个数字表示蓝色通道值。
 
