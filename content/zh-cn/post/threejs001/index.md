@@ -6,9 +6,9 @@ date: 2024-12-27
 image: cover.jpg
 categories:
     - 3D
-    - three.js
+    - threejs
 tags:
-    - three.js
+    - threejs
 weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
