@@ -22,10 +22,17 @@ url = "https://twitter.com/@fyh_wj"
 [social.params]
 icon = "brand-twitter"
 
+#[[social]]
+#identifier = "wechat"
+#name = "wechat"
+#url = ""
+#[social.params]
+#icon = "brand-wechat"
+
 [[social]]
-identifier = "wechat"
-name = "wechat"
-url = ""
+identifier = "youtube"
+name = "youtube"
+url = "https://www.youtube.com/@FollowYourHeart_Youtube"
 [social.params]
-icon = "brand-wechat"
+icon = "brand-youtube"
 
