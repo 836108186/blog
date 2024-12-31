@@ -2,15 +2,20 @@
 title: Links
 links:
   - title: GitHub
-    description: GitHub is the world's largest software development platform.
-    website: https://github.com
+    description: Github is the world's largest software development platform.
+    website: https://github.com/836108186
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+  - title: Twitter
+    description: Twitter is a social networking service that allows users to send and read short messages through the website or mobile devices.
+    website: https://twitter.com/@fyh_wj
+    image: /img/twitter.png
+
 menu:
     main: 
         weight: 4
         params:
             icon: link
-
+            
 comments: false
 ---
 
