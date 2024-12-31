@@ -71,7 +71,7 @@ In short, GLSL is a program that makes our geometric shapes look better and more
 4. `modelViewMatrix` (Model View Matrix): Is a combination of `viewMatrix` and `modelMatrix`. It represents the matrix that transforms the model from model space to the observer space. By first applying the vertex positions of the model to `modelMatrix` and then to `viewMatrix`, they can be converted from the local coordinate system to the observer coordinate system.
 ## GLSL Color Conversion
 ### Hexadecimal Conversion to RGB Color
-![Untitled](glsl001.png)
+![glsl001](glsl001.png)
 In the context of computer programming, hexadecimal is a base-16 number system that uses numbers 0-9 and letters A-F to represent values. In this case, "0xFF0000" represents red in RGB format, with the first two digits representing the red channel value, the next two digits representing the green channel value, and the last two digits representing the blue channel value.
 In the rgba format, the value range of each color channel is from 0 to 255, so we can convert each 2-digit value in the hexadecimal color code to a decimal number and map them to the corresponding red, green, and blue channels.
 In this example, the `0x` prefix indicates that the value following it is in hexadecimal format, `FF` converts to a decimal number of 255, so the red channel of this color is 255. The green and blue channels are both 0, because their values in the hexadecimal code are both 00. At the same time, because there is no value for the alpha channel, so A=1.0, the value of the transparency channel is also 255, because it is completely opaque.
