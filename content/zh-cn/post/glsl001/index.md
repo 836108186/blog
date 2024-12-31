@@ -1,9 +1,9 @@
 ---
-title: GLSL：让几何图形变得更好看的程序
+title: GLSL：让几何图形变得更好看
 description: 本文将带你走进GLSL的世界，探索着色器如何让3D图形变得更好看。我们将了解着色器的基本概念、类型、常用变量和颜色转换，并学习如何使用GLSL语言编写着色器程序。无论你是WebGL开发者还是对3D图形感兴趣，这篇文章都将为你提供宝贵的知识和灵感。
 slug: glsl001
 date: 2024-12-31
-image: cover.jpg
+image: glsl-cover.jpg
 categories:
     - glsl
 tags:
