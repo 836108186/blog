@@ -1,6 +1,7 @@
 ---
 title: Three.js：你的3D世界
 description: Three.js 是一个 3D JavaScript 库，它可以帮助你为网络创造3D体验，而且非常容易使用。如果你想让你的网站更加炫酷，那么 Three.js 一定是你的好帮手。
+keywords: ["Three.js", "3D", "WebGL", "JavaScript"]
 slug: threejs001
 date: 2024-12-27
 image: cover.jpg

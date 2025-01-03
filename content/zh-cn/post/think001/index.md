@@ -1,6 +1,7 @@
 ---
 title: Cloufare+Github Page 搭建静态网站
 description: Cloufare+Github Page 搭建静态网站
+keywords: ["Cloufare", "Github Page", "CDN"]
 slug: think001
 date: 2024-12-31
 image: think001-cover.jpg

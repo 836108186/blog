@@ -1,6 +1,7 @@
 ---
 title: Three.js 3D Scene Optimization Techniques
 description: Three.js is a popular 3D library for creating web-based 3D scenes. Here are some common optimization techniques to help you improve the performance of your Three.js scenes.
+keywords: ["Three.js", "3D", "WebGL", "JavaScript"]
 slug: threejs002
 date: 2024-12-27
 image: threejs002-cover.jpg

@@ -1,6 +1,7 @@
 ---
 title: GLSL：Programs that Make Geometric Shapes Look Better
 description: This blog post delves into the world of GLSL, exploring how shaders can enhance the appearance of 3D graphics. We will cover the fundamentals of shaders, their types, commonly used variables, and color conversions, and learn how to write shader programs using the GLSL language. Whether you are a WebGL developer or have an interest in 3D graphics, this article will provide valuable knowledge and inspiration.
+keywords: ["GLSL", "shader", "WebGL", "3D graphics"]
 slug: glsl001
 date: 2024-12-31
 image: glsl-cover.jpg

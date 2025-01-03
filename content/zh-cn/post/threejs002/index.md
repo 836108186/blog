@@ -1,6 +1,7 @@
 ---
 title: Three.js常见优化方案
 description: Three.js 3D场景优化方案
+keywords: ["Three.js", "3D", "WebGL", "JavaScript"]
 slug: threejs002
 date: 2024-12-27
 image: threejs002-cover.jpg

@@ -1,6 +1,7 @@
 ---
 title: Three.js:Your Gateway to 3D Worlds
 description: Three.js is a 3D JavaScript library that empowers you to create 3D experiences on the web with ease. If you want to make your website more eye-catching, Three.js is your ideal companion.
+keywords: ["Three.js", "3D", "WebGL", "JavaScript"]
 slug: threejs001
 date: 2024-12-27
 image: cover.jpg
