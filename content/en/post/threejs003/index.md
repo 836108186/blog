@@ -3,7 +3,7 @@ title: Universal Template for Three.js 3D Scenes Built with Vite
 description: A universal Three.js project template built with Vite
 keywords: ["Three.js", "3D", "WebGL", "JavaScript","template"]
 slug: threejs003
-date: 2024-1-6
+date: 2025-01-06
 image: threejs003-cover.jpg
 categories:
     - 3D
