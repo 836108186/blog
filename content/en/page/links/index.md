@@ -7,7 +7,7 @@ links:
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
   - title: Twitter
     description: Twitter is a social networking service that allows users to send and read short messages through the website or mobile devices.
-    website: https://twitter.com/@fyh_wj
+    website: https://twitter.com/@followheart_x
     image: /img/twitter.png
 
 menu:

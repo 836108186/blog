@@ -1,5 +1,5 @@
 ---
-title: 什么是SMART法则
+title: 什么是SMART法则?
 description: SMART法则是一种目标设定的方法，它可以帮助你制定具体、可衡量、可实现、相关和时限的目标。在本文中，我们将深入探讨SMART法则的含义、优势和应用，帮助你更好地实现自己的目标。
 keywords: ["SMART", "思考", "优势"]
 slug: think002

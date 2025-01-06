@@ -7,7 +7,7 @@ links:
     image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
   - title: Twitter
     description: Twitter是一个社交网络服务，用户可以通过网站或移动设备发送和阅读短消息。
-    website: https://twitter.com/@fyh_wj
+    website: https://twitter.com/@followheart_x
     image: /img/twitter.png
     
 menu:
