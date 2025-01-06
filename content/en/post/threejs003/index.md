@@ -218,7 +218,7 @@ npm run serve
 ![image.png](threejs003-1.jpg)
 
 ### Conclusion
-[Download the full code](https://pub-4babffd0710542e691e21c4d52e9c78d.r2.dev/personal/BlogResourceFile/LinkResource/threejs003/threejsBaseTemplate-vite.zip)
+[Download the full code](https://pub-4babffd0710542e691e21c4d52e9c78d.r2.dev/BlogResourceFile/LinkResource/threejs003/threejsBaseTemplate-vite.zip)
 
 By following the above steps, we have completed the construction of a basic template, which is convenient for subsequent optimization and plugin application. I hope this article is helpful to you!
 

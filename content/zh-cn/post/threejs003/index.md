@@ -218,7 +218,7 @@ npm run serve
 
 ### 结论
 
-[完整代码链接](https://pub-4babffd0710542e691e21c4d52e9c78d.r2.dev/personal/BlogResourceFile/LinkResource/threejs003/threejsBaseTemplate-vite.zip)
+[完整代码链接](https://pub-4babffd0710542e691e21c4d52e9c78d.r2.dev/BlogResourceFile/LinkResource/threejs003/threejsBaseTemplate-vite.zip)
 
 通过上面步骤，我们就完成了一个基础模板构建，方便后续优化和插件应用。希望这篇博文对您有所帮助！
 
