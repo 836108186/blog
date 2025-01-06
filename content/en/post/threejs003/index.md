@@ -8,7 +8,6 @@ image: threejs003-cover.jpg
 categories:
     - 3D
     - threejs
-    - template
 tags:
     - threejs
 weight: 1       # You can add weight to some posts to override the default sorting (date descending)
