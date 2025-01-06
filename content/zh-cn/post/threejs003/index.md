@@ -4,7 +4,7 @@ description: Three.js 3D 场景通用模板
 keywords: ["Three.js", "3D", "WebGL", "JavaScript","template"]
 slug: threejs003
 date: 2024-1-6
-# image: threejs002-cover.jpg
+image: threejs003-cover.jpg
 categories:
     - 3D
     - threejs

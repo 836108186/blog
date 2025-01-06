@@ -4,7 +4,7 @@ description: A universal Three.js project template built with Vite
 keywords: ["Three.js", "3D", "WebGL", "JavaScript","template"]
 slug: threejs003
 date: 2024-1-6
-# image: threejs002-cover.jpg
+image: threejs003-cover.jpg
 categories:
     - 3D
     - threejs
