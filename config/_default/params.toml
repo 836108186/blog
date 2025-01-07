@@ -79,10 +79,8 @@ enabled = true
 [comments]
 enabled = true
 provider = "disqus"
-[comments.disqus]
-shortname = "betterthantomorrow-top"
 [comments.disqusjs]
-shortname = ""
+shortname = "betterthantomorrow-top"
 apiUrl = ""
 apiKey = ""
 admin = ""
