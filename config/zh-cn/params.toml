@@ -77,10 +77,11 @@ enabled = true
 
 ## Comments
 [comments]
-enabled = true
+enabled = false
 provider = "disqus"
+
 [comments.disqusjs]
-shortname = "wj-blog"
+shortname = ""
 apiUrl = ""
 apiKey = ""
 admin = ""
