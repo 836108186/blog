@@ -82,7 +82,7 @@ provider = "disqus"
 
 [comments.disqusjs]
 shortname = "wj-blog"
-apiUrl = ""
+apiUrl = "https://betterthantomorrow.top/zh-cn/"
 apiKey = ""
 admin = ""
 adminLabel = ""

@@ -18,7 +18,7 @@ In our previous article, we shared the basic components of Three.js, which inclu
 
 [Three.js:Your Gateway to 3D Worlds](https://betterthantomorrow.top/p/threejs001/)
 
-### Project Structure
+## Project Structure
 
 First，let's take a look at the project structure, which consists of the following files and folders：
 

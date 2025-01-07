@@ -82,7 +82,7 @@ provider = "disqus"
 
 [comments.disqusjs]
 shortname = "betterthantomorrow-top"
-apiUrl = ""
+apiUrl = "https://betterthantomorrow.top/"
 apiKey = ""
 admin = ""
 adminLabel = ""
