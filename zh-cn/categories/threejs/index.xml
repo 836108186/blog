@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Threejs on 从心出发</title><link>https://betterthantomorrow.top/zh-cn/categories/threejs/</link><description>Recent content in Threejs on 从心出发</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>your-email@example.com (Your Name)</managingEditor><webMaster>your-email@example.com (Your Name)</webMaster><lastBuildDate>Mon, 06 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://betterthantomorrow.top/zh-cn/categories/threejs/index.xml" rel="self" type="application/rss+xml"/><item><title>基于Vite构建的Three.js 3D 场景通用模板</title><link>https://betterthantomorrow.top/zh-cn/p/threejs003/</link><pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/threejs003/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs003/threejs003-cover.jpg" alt="Featured image of post 基于Vite构建的Three.js 3D 场景通用模板" />&lt;h2 id="使用-vite-和-threejs-构建-3d-web-应用">使用 Vite 和 Three.js 构建 3D Web 应用
+&lt;/h2>&lt;p>之前的文章我们分享了Threejs 的基本构成，需要有场景（scense）、相机（Camera）、对象（Objects）、渲染器（renderers），本篇文章将会基于这四个基本构成来创建一个基础的threejs渲染&lt;/p>
+&lt;p>&lt;a class="link" href="https://betterthantomorrow.top/zh-cn/p/threejs001/" target="_blank" rel="noopener"
+>Three.js：你的3D世界&lt;/a>&lt;/p>
+&lt;h3 id="项目结构">项目结构
+&lt;/h3>&lt;p>首先，让我们看一下项目的结构，该项目由以下文件和文件夹组成：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">index.html // 项目的 HTML 主入口
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">js/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> app.js // 包含 Three.js 代码的主 JS 文件
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">package.json // 项目的依赖和脚本配置
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vite.config.js // Vite 的配置文件
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="配置文件">配置文件
+&lt;/h3>&lt;h3 id="indexhtml">&lt;code>index.html&lt;/code>
+&lt;/h3>&lt;p>这是项目的入口 HTML 文件，包含了基本的 HTML 结构和一个引用 &lt;code>js/app.js&lt;/code> 的 &lt;code>&amp;lt;script&amp;gt;&lt;/code> 标签。
+threejs 需要容器来渲染，所以在index.html中我们创建了一个div容器，id为container&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;UTF-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">http-equiv&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;X-UA-Compatible&amp;#34;&lt;/span> &lt;span class="na">content&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;IE=edge&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;viewport&amp;#34;&lt;/span> &lt;span class="na">content&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">body&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#ccc&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">margin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">#&lt;/span>&lt;span class="nn">container&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">vh&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">style&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;container&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;js/app.js&amp;#34;&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="appjs">&lt;code>app.js&lt;/code>
+&lt;/h3>&lt;p>这是项目的 JavaScript 文件，我们将在这里编写 Three.js 代码。同时也会在这里创建 Three.js 场景、相机和渲染器，并添加一些基本的几何体。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="nx">as&lt;/span> &lt;span class="nx">THREE&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;three&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">OrbitControls&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;three/examples/jsm/controls/OrbitControls.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">Sketch&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">options&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">options&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dom&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">scene&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Scene&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取容器的宽高
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 创建渲染器
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">WebGLRenderer&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">alpha&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span> &lt;span class="c1">// 透明背景
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 设置渲染器的大小
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setSize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">domElement&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 创建相机
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PerspectiveCamera&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">70&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.01&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 设置相机的位置与视点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">position&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">z&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 创建控制器
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">controls&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">OrbitControls&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">domElement&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 添加物体
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addObjects&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 监听窗口大小变化
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setupResize&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 渲染
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">render&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setupResize&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;resize&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resize&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bind&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">resize&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 获取容器的宽高，设置渲染器的大小，设置相机的宽高比，更新相机的投影矩阵
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetWidth&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">container&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">offsetHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setSize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">aspect&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">width&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">height&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">updateProjectionMatrix&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">addObjects&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 创建一个平面
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">geometry&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">PlaneGeometry&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">50&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 创建一个材质
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">material&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">MeshNormalMaterial&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 在场景中添加一个网格，网格是物体的容器，将几何体和材质传入网格中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">scene&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nx">THREE&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Mesh&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">geometry&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">material&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">render&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">render&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">scene&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">camera&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">new&lt;/span> &lt;span class="nx">Sketch&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 将需要渲染的容器传入到构造函数中
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">dom&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;container&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="packagejson">&lt;code>package.json&lt;/code>
+&lt;/h3>&lt;p>这是项目的配置文件，定义了项目的依赖项和脚本。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;module&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;threejs-template&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;version&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;description&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;A Three.js template project using Vite&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;dev&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;vite&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;build&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;vite build&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;serve&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;vite preview&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;dependencies&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;three&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;^0.150.1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;devDependencies&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;vite&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;^4.0.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="viteconfigjs">&lt;code>vite.config.js&lt;/code>
+&lt;/h3>&lt;p>这是 Vite 的配置文件，配置了 Vite 插件。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">defineConfig&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;vite&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">defineConfig&lt;/span>&lt;span class="p">({});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="运行项目">运行项目
+&lt;/h3>&lt;ol>
+&lt;li>安装依赖：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>启动开发服务器：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm run dev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>构建生产版本：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm run build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>预览生产版本：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">npm run serve
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="效果预览">效果预览
+&lt;/h3>&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs003/threejs003-1.jpg"
+width="1920"
+height="919"
+srcset="https://betterthantomorrow.top/zh-cn/p/threejs003/threejs003-1_hu7605835096323365381.jpg 480w, https://betterthantomorrow.top/zh-cn/p/threejs003/threejs003-1_hu4616435068384073382.jpg 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="501px"
+>&lt;/p>
+&lt;h3 id="结论">结论
+&lt;/h3>&lt;p>&lt;a class="link" href="https://pub-4babffd0710542e691e21c4d52e9c78d.r2.dev/BlogResourceFile/LinkResource/threejs003/threejsBaseTemplate-vite.zip" target="_blank" rel="noopener"
+>完整代码链接&lt;/a>&lt;/p>
+&lt;p>通过上面步骤，我们就完成了一个基础模板构建，方便后续优化和插件应用。希望这篇博文对您有所帮助！&lt;/p></description></item><item><title>Three.js：你的3D世界</title><link>https://betterthantomorrow.top/zh-cn/p/threejs001/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/threejs001/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs001/cover.jpg" alt="Featured image of post Three.js：你的3D世界" />&lt;h2 id="什么是-threejs">&lt;strong>什么是 Three.js？&lt;/strong>
+&lt;/h2>&lt;p>Three.js 是一个 3D JavaScript 库，它可以帮助你为网络创造3D体验，而且非常容易使用。如果你想让你的网站更加炫酷，那么 Three.js 一定是你的好帮手。&lt;/p>
+&lt;p>Three.js 是一个在 MIT 许可下的 JavaScript 库，它在 WebGL 之上运行。这个库的目标就是简化处理3D内容的过程。只需要几行代码，你就可以获得一个动画3D场景，而且你无需了解复杂的着色器和矩阵。&lt;/p>
+&lt;h2 id="什么是-webgl">&lt;strong>什么是 WebGL？&lt;/strong>
+&lt;/h2>&lt;p>WebGL 是一种 JavaScript API，它可以在画布中呈现三角形，而且速度非常快，因为它使用访问者的图形处理单元 (GPU)。GPU 可以进行数千次并行计算，这让我们可以在3D场景中进行复杂的运算。然而，尽管 WebGL 在处理3D场景方面非常出色，但仍然有一些缺点。例如，如果你想要创建一个复杂的场景，你需要掌握一些高级技巧，这可能对于初学者来说非常困难。此外，WebGL 也需要高性能的硬件来运行，因为它需要大量的计算资源。因此，如果你的计算机性能不足，那么使用 WebGL 可能会导致你的应用程序运行缓慢或崩溃。&lt;/p>
+&lt;p>原生 WebGL 非常困难，因为你需要手动写很多代码。但是 Three.js 消除了这个障碍，让你可以轻松创建3D场景。除了 Three.js 之外，还有其他一些工具可以帮助您更轻松地创建3D场景，例如 Babylon.js 和 A-Frame。这些工具提供了各种各样的功能，从简单的场景到复杂的虚拟现实体验。因此，如果您想要创建一个3D应用程序，您可以考虑使用这些工具来简化开发流程。&lt;/p>
+&lt;h2 id="threejs-的运行需要4个条件">&lt;strong>Three.js 的运行需要4个条件&lt;/strong>
+&lt;/h2>&lt;ul>
+&lt;li>场景 (scenes)&lt;/li>
+&lt;li>渲染器 (renderers)&lt;/li>
+&lt;li>相机 (cameras)&lt;/li>
+&lt;li>对象 (objects)&lt;/li>
+&lt;/ul>
+&lt;h2 id="什么是场景">&lt;strong>什么是场景？&lt;/strong>
+&lt;/h2>&lt;p>在 Three.js 中，场景是一个非常重要的概念。它类似于一个容器或者说世界，可以包含各种对象、模型、粒子和灯光等。场景是 Three.js 中的一个核心组件，它是构建一个 3D 场景所必需的。通过将不同的对象添加到场景中，我们可以创建一个复杂的 3D 环境，从而实现更加生动、吸引人的 3D 体验。&lt;/p>
+&lt;h2 id="什么是渲染器">&lt;strong>什么是渲染器？&lt;/strong>
+&lt;/h2>&lt;p>渲染器是一个非常重要的组件，它的工作是将我们的代码与设计渲染到我们的web中。在threejs中，我们通常使用 &lt;a class="link" href="https://threejs.org/docs/index.html#api/en/renderers/WebGLRenderer" target="_blank" rel="noopener"
+>WebGLRenderer&lt;/a> 类来进行渲染。WebGL是一种3D绘图标准，它允许我们在web上呈现复杂的3D图形，而不需要插件，这是非常棒的。 WebGLRenderer的一个伟大之处在于它提供了丰富的功能，例如对材质、灯光、阴影和反射的支持。这使得我们能够创建出更加逼真的场景和模型，从而提高用户体验。总之，渲染器是任何三维场景的重要组成部分，也是threejs中不可或缺的组件。&lt;/p>
+&lt;h2 id="什么是对象">&lt;strong>什么是对象？&lt;/strong>
+&lt;/h2>&lt;p>在 Three.js 中，所有的元素都是对象，包括几何体、模型、粒子和灯光等。这些对象可以应用不同的材质和纹理，并使用相机和光源进行渲染。 Three.js 还提供了许多扩展和库，例如 MeshStandardMaterial 和 dat.gui，可以让你创建更高级的渲染效果和用户界面。&lt;/p>
+&lt;h2 id="什么是相机">&lt;strong>什么是相机？&lt;/strong>
+&lt;/h2>&lt;p>在 Three.js 中，相机是非常重要的一个元素，用来决定我们观察场景的角度和位置。相机被用来模拟人眼对场景的观察，因此非常重要。在 Three.js 中，创建相机非常简单，我们可以使用 &lt;a class="link" href="https://threejs.org/docs/index.html#api/en/cameras/PerspectiveCamera" target="_blank" rel="noopener"
+>PerspectiveCamera&lt;/a> 类来创建。这个类允许我们设置许多参数，例如视角、宽高比、近截面和远截面等等，因此我们可以完全控制相机的行为。&lt;/p>
+&lt;p>另外，在 Three.js 中，相机本身是不可见的，它仅用于计算和确定场景中物体的位置和角度。因此，我们只能看到相机所观察到的内容，而不能看到相机本身。这意味着，我们需要在场景中加入其他可见的对象，例如物体、灯光等等，才能看到场景。因此，在使用 Three.js 时，不仅需要了解相机的使用，还需要了解如何创建和操作其他类型的对象。&lt;/p>
+&lt;blockquote>
+&lt;p>PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
+fov — 摄像机视锥体垂直视野角度 aspect — 摄像机视锥体长宽比 near — 摄像机视锥体近端面 far — 摄像机视锥体远端面&lt;/p>
+&lt;/blockquote>
+&lt;p>在Three.js中，我们可以拥有多个相机，但通常情况下只需要一个。&lt;/p>
+&lt;p>相机在Three.js中类似于一个锥形体，它受到视野范围和纵横比的影响。&lt;/p>
+&lt;p>&lt;strong>视野范围：&lt;/strong>&lt;/p>
+&lt;p>视野是你的视角有多大。如果你使用一个非常大的角度，你将能够同时看到各个方向，但会失真很多，因为结果将绘制在一个小矩形上。如果使用小角度，则物体看起来会被放大。&lt;/p>
+&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-1.jpeg"
+width="500"
+height="568"
+srcset="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-1_hu14707183227796338091.jpeg 480w, https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-1_hu6896150423842853567.jpeg 1024w"
+loading="lazy"
+alt="视野范围"
+class="gallery-image"
+data-flex-grow="88"
+data-flex-basis="211px"
+>
+&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-2.jpeg"
+width="720"
+height="528"
+srcset="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-2_hu14544644941325311347.jpeg 480w, https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-2_hu14412635524144021881.jpeg 1024w"
+loading="lazy"
+alt="视野范围"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="327px"
+>&lt;/p>
+&lt;h3 id="那么如何将渲染到指定的位置呢">&lt;strong>那么如何将渲染到指定的位置呢？&lt;/strong>
+&lt;/h3>&lt;p>在这种情况下，我们需要理解笛卡尔坐标系（这个比较难解释，所以这里我们使用图片来解释），通过x，y，z三个坐标轴在三维空间中进行定位。在WebGL与Threejs中使用的是正交右手坐标系：&lt;/p>
+&lt;ul>
+&lt;li>正交右手坐标系：右手拇指代表X轴，食指代表Y轴，中指代表Z轴。&lt;/li>
+&lt;li>手臂和拇指代表Y轴。&lt;/li>
+&lt;li>与地面平行的是Z轴。&lt;/li>
+&lt;li>拇指代表X轴。
+&lt;img src="https://betterthantomorrow.top/threejs001-3.jpeg"
+loading="lazy"
+alt="视野范围"
+>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>笛卡尔坐标系图示：&lt;/strong>
+&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-4.jpeg"
+width="513"
+height="576"
+srcset="https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-4_hu17481795310240195268.jpeg 480w, https://betterthantomorrow.top/zh-cn/p/threejs001/threejs001-4_hu9800431788232822744.jpeg 1024w"
+loading="lazy"
+alt="视野范围"
+class="gallery-image"
+data-flex-grow="89"
+data-flex-basis="213px"
+>&lt;/p>
+&lt;h2 id="结尾">&lt;strong>结尾&lt;/strong>
+&lt;/h2>&lt;p>以上就是 Three.js 渲染流程的详细解释。了解这个流程对于理解 Three.js 的工作原理非常重要。如果你想要进一步深入学习 Three.js，我建议你查看官方文档和示例，这里有很多有用的信息和代码片段，可以帮助你更好地理解和使用 Three.js。此外，你也可以尝试创建自己的3D场景和模型，这将帮助你更好地掌握 Three.js 的技术和工作原理。希望这篇文章对你有所帮助，谢谢！&lt;/p></description></item><item><title>Three.js常见优化方案</title><link>https://betterthantomorrow.top/zh-cn/p/threejs002/</link><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/threejs002/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/threejs002/threejs002-cover.jpg" alt="Featured image of post Three.js常见优化方案" />&lt;p>如果你在使用Three.js创建3D场景时遇到了性能瓶颈，不用担心！以下是一些常见的优化方案，可以帮助你提高场景性能。&lt;/p>
+&lt;h2 id="模型优化">模型优化
+&lt;/h2>&lt;h3 id="1-合并几何体">1. 合并几何体
+&lt;/h3>&lt;p>一种常见的模型优化技术是将多个几何体合并为一个几何体。这样可以减少渲染调用次数，从而提高性能。你可以使用&lt;code>BufferGeometryUtils&lt;/code>库中的&lt;code>mergeBufferGeometries&lt;/code>方法将多个几何体合并。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">BufferGeometryUtils&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;three&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">mergedGeometry&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">BufferGeometryUtils&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mergeBufferGeometries&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">geometry1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">geometry2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">geometry3&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-减少几何体面数">2. 减少几何体面数
+&lt;/h3>&lt;p>另一种常见的模型优化技术是减少几何体的面数。你可以使用3D建模软件或者Three.js中的&lt;code>SimplifyModifier&lt;/code>来减少几何体的面数。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">SimplifyModifier&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;three/examples/jsm/modifiers/SimplifyModifier&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">modifier&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">SimplifyModifier&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">simplifiedGeometry&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">modifier&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">modify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">geometry&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.5&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="o">%&lt;/span> &lt;span class="err">的面数&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="代码优化">代码优化
+&lt;/h2>&lt;h3 id="1-使用webgl渲染模式">1. 使用WebGL渲染模式
+&lt;/h3>&lt;p>默认情况下，Three.js使用WebGL渲染模式来渲染场景。但是，有时候你可能会意外地使用了Canvas渲染模式。确保你的代码使用了WebGL渲染模式，可以有效地提高性能。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">renderer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">THREE&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">WebGLRenderer&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-批量渲染">2. 批量渲染
+&lt;/h3>&lt;p>批量渲染是一种将多个物体一起渲染的技术，可以减少渲染调用次数。你可以使用&lt;code>InstancedMesh&lt;/code>来实现批量渲染。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">InstancedMesh&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;three&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">mesh&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">InstancedMesh&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">geometry&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">material&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="3-使用lod细节层次">3. 使用LOD（细节层次）
+&lt;/h3>&lt;p>使用LOD（细节层次）可以根据物体在场景中的距离来选择不同的模型细节级别。你可以使用&lt;code>LOD&lt;/code>对象来实现LOD功能。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">LOD&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;three&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">lod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">new&lt;/span> &lt;span class="n">LOD&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">lod&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addLevel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mesh1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">distance1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">lod&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addLevel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">mesh2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">distance2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="4渲染模糊处理像素比">4.&lt;strong>渲染模糊处理【像素比】&lt;/strong>
+&lt;/h3>&lt;blockquote>
+&lt;p>图像中的一个像素的宽度与高度之比，而帧纵横比则是指图像的一帧的宽度与高度之比
+js 中获取屏幕像素比：window.devicePixeRatio&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">renderer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setPixelRatio&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">min&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">devicePixelRatio&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="5屏幕适配">5.&lt;strong>屏幕适配&lt;/strong>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">/**&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">*&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">language&lt;/span> &lt;span class="n">js&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">sizes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">innerWidth&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">innerHeight&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;resize&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">更新画布尺寸&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">innerWidth&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">innerHeight&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">更新相机参数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">camera&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">aspect&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">width&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">height&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">camera&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">updateProjectionMatrix&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">更新渲染尺寸&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">renderer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setSize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sizes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">height&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">renderer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setPixelRatio&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Math&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">min&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">devicePixelRatio&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="6画布样式常见优化">6.&lt;strong>画布样式常见优化&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>threeJS画布去除边框和轮廓&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*@language css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> margin: 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding: 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* @language css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* @element canvas
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.webgl
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> position: fixed;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> top: 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> left: 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> outline: none;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>删除任何【所有】滚动&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">* @language css
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">html,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">body
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> overflow: hidden;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="7全屏处理">7.&lt;strong>全屏处理&lt;/strong>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="err">添加双击事件并判断是否全屏显示&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">window&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;dblclick&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">fullscreenElement&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">fullscreenElement&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">webkitFullscreenElement&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">fullscreenElement&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">canvas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requestFullscreen&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">canvas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requestFullscreen&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">canvas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">webkitRequestFullscreen&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">canvas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">webkitRequestFullscreen&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exitFullscreen&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exitFullscreen&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">webkitExitFullscreen&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">document&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">webkitExitFullscreen&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="结论">结论
+&lt;/h2>&lt;p>以上是一些常见的Three.js优化方案。当然，这里只是介绍了一些基础的技术，你还可以通过其他方式来进一步提高场景性能。希望这篇文章能帮助你更好地优化你的Three.js场景！&lt;/p></description></item></channel></rss>
