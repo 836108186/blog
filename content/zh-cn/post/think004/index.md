@@ -1,7 +1,7 @@
 ---
 title: 从复杂到清晰：SCQA如何助你解决问题
 description: SCQA是一种思考问题的方法论，它可以帮助我们更好地理解问题的本质，提出更有针对性的解决方案。本文将介绍SCQA的基本概念和应用场景，希望对大家有所帮助。
-keywords: ["思考", "方法论"]
+keywords: ["思考", "方法论","SCQA"]
 slug: think004
 date: 2025-01-15
 image: think004-cover.jpg

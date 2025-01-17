@@ -1,7 +1,7 @@
 ---
 title: 用SWOT分析法轻松破解难题
 description: 通过案例深入解析SWOT分析法，让你全面掌控优势与机会，轻松制定高效策略。
-keywords: ["思考", "方法论"]
+keywords: ["思考", "方法论","SWOT"]
 slug: think005
 date: 2025-01-16
 image: think005-cover.jpg

@@ -2,13 +2,13 @@
 title: 观AI有感
 description: 公司的AI项目，让我对AI有了更深的认识，也让我对AI的未来有了更多的期待，同时从个人来说也让我对未来产生了一些思考
 keywords: ["AI", "思考", "优势"]
-slug: think003
+slug: record002
 date: 2025-01-06
 image: think003-cover.jpg
 categories:
-    - think
+    - record
 tags:
-    - think
+    - record
 weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 
