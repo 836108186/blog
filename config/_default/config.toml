@@ -1,6 +1,6 @@
 baseURL = "https://betterthantomorrow.top/"
 languageCode = "en"
-title = "Fllow your heart"
+title = "子小言记"
 theme = "hugo-theme-stack"
 defaultContentLanguage = "en"
 enableRobotsTXT = true
@@ -11,8 +11,8 @@ enableRobotsTXT = true
 
 [params]
   description = "做自己想做的事情，从新出发，从心出发Follow your heart"
-  author = "Follow your heart"
-  keywords = ["blog", "Follow your heart", "study","博客","学习","从心出发"]
+  author = "子小言记"
+  keywords = ["blog", "子小言记", "study","博客","学习","从心出发"]
   googleAnalytics = "G-RQMNSJDBE2"
   enableGoogleAds = true
   googleAdsScriptSrc = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4851827946087899"
@@ -23,7 +23,7 @@ enableRobotsTXT = true
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Follow your heart"
+    title = "子小言记"
     weight = 1
     contentDir = "content/en"
     [languages.en.params.sidebar]
@@ -32,7 +32,7 @@ enableRobotsTXT = true
     
   [languages.zh-cn]
     languageName = "简体中文"
-    title = "从心出发"
+    title = "子小言记"
     weight = 1
     contentDir = "content/zh-cn"
     [languages.zh-cn.params.sidebar]
