@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>think on 子小言记</title><link>https://betterthantomorrow.top/zh-cn/categories/think/</link><description>Recent content in think on 子小言记</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>your-email@example.com (Your Name)</managingEditor><webMaster>your-email@example.com (Your Name)</webMaster><lastBuildDate>Fri, 17 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://betterthantomorrow.top/zh-cn/categories/think/index.xml" rel="self" type="application/rss+xml"/><item><title>高效解决问题的利器：MECE法则</title><link>https://betterthantomorrow.top/zh-cn/p/think006/</link><pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/think006/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/think006-cover.jpg" alt="Featured image of post 高效解决问题的利器：MECE法则" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在之前的文章中,我们探讨了&lt;a class="link" href="https://betterthantomorrow.top/zh-cn/p/think005/" target="_blank" rel="noopener"
+>SWOT分析法&lt;/a>来分析内外部环境，这次我们来看新的方法论MECE法则。&lt;/p>
+&lt;p>同样的在开始之前，我还是想在重复一下那句话，独立思考是一种能力，而方法论是一种工具。熟练使用工具，能帮助我们理清复杂问题，找到更有针对性的解决方案，希望大家和我一起能通过实践收获新知。&lt;/p>
+&lt;h2 id="什么是mece法则">什么是MECE法则？
+&lt;/h2>&lt;p>MECE的全称是&lt;strong>Mutually Exclusive Collectively Exhaustive&lt;/strong>，即互斥且完全穷尽。这个方法论最早是由麦肯锡公司提出的，用于解决复杂问题，确保问题的全面性和逻辑性。&lt;/p>
+&lt;p>核心思想：将问题拆分为 &lt;strong>互斥且完全穷尽&lt;/strong> 的子问题。具体来说：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>相互独立&lt;/strong>：子问题之间没有重叠，避免重复工作。&lt;/li>
+&lt;li>&lt;strong>完全穷尽&lt;/strong>：所有子问题的组合可以完全覆盖原问题，避免遗漏关键因素。&lt;/li>
+&lt;/ul>
+&lt;p>通过这种结构化的方法，我们可以更清晰地看待问题，找到针对性的解决方案。&lt;/p>
+&lt;h2 id="如何使用mece法则">如何使用MECE法则？
+&lt;/h2>&lt;p>然我们来假设一个场景，公司A是一家新创公司，公司希望提升用户的留存率，我们可以通过MECE法则来分析问题：&lt;/p>
+&lt;h3 id="step-1-明确问题">Step 1: 明确问题
+&lt;/h3>&lt;p>首先，确定你想解决的核心问题。比如，公司A希望提升用户留存率。&lt;/p>
+&lt;h3 id="step-2-拆分问题">Step 2: 拆分问题
+&lt;/h3>&lt;p>利用MECE法则，将问题分解为互斥且完全穷尽的子问题：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>用户层面&lt;/strong>：哪些用户群体的留存率较低？&lt;/li>
+&lt;li>&lt;strong>产品层面&lt;/strong>：产品功能是否满足用户需求？&lt;/li>
+&lt;li>&lt;strong>运营层面&lt;/strong>：营销活动是否吸引用户长期参与？&lt;/li>
+&lt;/ul>
+&lt;h3 id="step-3-分析每个子问题">Step 3: 分析每个子问题
+&lt;/h3>&lt;p>针对每个子问题，深入挖掘其核心原因。例如：&lt;/p>
+&lt;ol>
+&lt;li>用户层面：通过用户数据分析，识别不同用户群体的留存表现。&lt;/li>
+&lt;li>产品层面：收集用户反馈，评估功能使用率与满意度。&lt;/li>
+&lt;li>运营层面：回顾以往活动，分析用户参与率及其后续行为。&lt;/li>
+&lt;/ol>
+&lt;h3 id="step-4-整合结论并制定行动计划">Step 4: 整合结论并制定行动计划
+&lt;/h3>&lt;p>根据每个子问题的分析结果，制定针对性的改进措施：&lt;/p>
+&lt;ul>
+&lt;li>优化用户体验：为低留存率群体设计专属引导流程。&lt;/li>
+&lt;li>增强功能价值：推出满足用户需求的新功能。&lt;/li>
+&lt;li>提升运营效率：定期推出高粘性的互动活动。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/think006-2.png"
+width="1017"
+height="272"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/think006-2_hu_af1dfe620cc85ec4.png 480w, https://betterthantomorrow.top/zh-cn/p/think006/think006-2_hu_47d3b5b874f17900.png 1024w"
+loading="lazy"
+alt="图片举例"
+class="gallery-image"
+data-flex-grow="373"
+data-flex-basis="897px"
+>&lt;/p>
+&lt;h2 id="mece法则的实际应用场景">MECE法则的实际应用场景
+&lt;/h2>&lt;ol>
+&lt;li>&lt;strong>职业规划&lt;/strong>：当你为未来感到迷茫时，可以从兴趣、能力、市场需求等角度入手，构建一个MECE框架。&lt;/li>
+&lt;li>&lt;strong>项目管理&lt;/strong>：在项目启动前，用MECE法则梳理需求，确保方案覆盖所有关键点。&lt;/li>
+&lt;li>&lt;strong>生活决策&lt;/strong>：面对多项选择（如买房、留学），用MECE法则分类和筛选信息，快速找到最优解。&lt;/li>
+&lt;/ol>
+&lt;h2 id="mece-与其他方法论的比较">MECE 与其他方法论的比较
+&lt;/h2>&lt;p>在面对复杂问题时，单一的方法论有时难以全面应对。因此，我们需要根据问题的性质选择合适的工具。以下是 MECE 与其他常见方法论的对比及其适用场景分析：&lt;/p>
+&lt;h3 id="mece-法则">MECE 法则
+&lt;/h3>&lt;p>&lt;strong>核心特点&lt;/strong>：逻辑性强，强调分类的“相互独立，完全穷尽”。&lt;br>
+&lt;strong>适用场景&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>复杂问题的拆解与梳理（如制定战略、优化流程）。&lt;/li>
+&lt;li>需要系统化分析，确保全面性的场景。&lt;br>
+&lt;strong>优点&lt;/strong>：&lt;/li>
+&lt;li>提供清晰的逻辑框架，便于深入思考和分析。&lt;/li>
+&lt;li>避免遗漏关键点，也避免冗余。&lt;br>
+&lt;strong>局限&lt;/strong>：&lt;/li>
+&lt;li>适用逻辑思维强的场景，但对情感或主观问题的分析支持有限。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="swot-分析">SWOT 分析
+&lt;/h3>&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/swot.png"
+width="1024"
+height="769"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/swot_hu_a529a45ded0e77a3.png 480w, https://betterthantomorrow.top/zh-cn/p/think006/swot_hu_d0ab383d9a68b843.png 1024w"
+loading="lazy"
+alt="swot"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>&lt;strong>核心特点&lt;/strong>：通过内外部分析（优势、劣势、机会、威胁）明确现状和方向。&lt;br>
+&lt;strong>适用场景&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>制定战略时，用于分析外部环境和内部资源（如企业发展规划）。&lt;/li>
+&lt;li>简单直观的分析场景（如个人职业规划）。&lt;br>
+&lt;strong>优点&lt;/strong>：&lt;/li>
+&lt;li>易于理解，适合初学者使用。&lt;/li>
+&lt;li>结合外部环境和内部因素，有助于识别机会和风险。&lt;br>
+&lt;strong>局限&lt;/strong>：&lt;/li>
+&lt;li>结果可能偏主观，缺乏系统化的逻辑。&lt;/li>
+&lt;li>无法直接生成行动计划，需要进一步细化。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="scqa-框架">SCQA 框架
+&lt;/h3>&lt;p>&lt;strong>核心特点&lt;/strong>：通过情境（Situation）、冲突（Complication）、问题（Question）、答案（Answer）构建清晰的叙述框架。&lt;br>
+&lt;strong>适用场景&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>需要快速表达观点、提出问题或讲述逻辑（如工作汇报、商业提案）。&lt;/li>
+&lt;li>用于说服场景，尤其是需要简洁有力的表达时。&lt;br>
+&lt;strong>优点&lt;/strong>：&lt;/li>
+&lt;li>聚焦于关键冲突，逻辑清晰且具有说服力。&lt;/li>
+&lt;li>更适合叙述问题和解决方案的场景。&lt;br>
+&lt;strong>局限&lt;/strong>：&lt;/li>
+&lt;li>不适用于深入分析，更多是呈现逻辑和结论的工具。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="smart-原则">SMART 原则
+&lt;/h3>&lt;blockquote>
+&lt;p>这里有意思的地方在于有些时候SMART对应的是Situational, Complication, Question, Answer，而有些时候对应的是Specific, Measurable, Achievable, Relevant, Time-bound，这里是为了更好的理解，所以做了一个对应并且在下面也会有示例。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>核心特点&lt;/strong>：以具体（Specific）、可测量（Measurable）、可实现（Achievable）、相关性（Relevant）、有时限（Time-bound）为标准设置目标。&lt;br>
+&lt;strong>适用场景&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>目标设定与管理（如团队目标制定、个人计划管理）。&lt;/li>
+&lt;li>需要执行性强、结果导向的场景。&lt;br>
+&lt;strong>优点&lt;/strong>：&lt;/li>
+&lt;li>强调目标的具体性与可操作性，有助于提高执行效率。&lt;/li>
+&lt;li>易于衡量成果，便于跟踪进度。&lt;br>
+&lt;strong>局限&lt;/strong>：&lt;/li>
+&lt;li>过于聚焦短期目标，可能忽略长期愿景。&lt;/li>
+&lt;li>不适合问题分析或逻辑推导的场景。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="方法论的选择与组合">方法论的选择与组合
+&lt;/h2>&lt;p>在实际工作中，单一方法论往往无法解决所有问题，结合使用不同方法论能达到更好的效果。例如：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>战略制定&lt;/strong>：先用 SWOT 分析内外部环境，再用 MECE 法则拆解关键问题，最后用 SMART 原则设定具体目标。&lt;/li>
+&lt;li>&lt;strong>商业提案&lt;/strong>：通过 SCQA 框架阐述问题与方案，再用 MECE 确保分析的全面性与逻辑性。&lt;/li>
+&lt;li>&lt;strong>个人发展规划&lt;/strong>：用 SWOT 明确现状与目标方向，用 SMART 细化行动计划。
+&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/think006-3.jpg"
+width="1456"
+height="816"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/think006-3_hu_e8e450a1a4b64a21.jpg 480w, https://betterthantomorrow.top/zh-cn/p/think006/think006-3_hu_9bd852d8e890e86c.jpg 1024w"
+loading="lazy"
+alt="插入图片"
+class="gallery-image"
+data-flex-grow="178"
+data-flex-basis="428px"
+>&lt;/li>
+&lt;/ol>
+&lt;h2 id="方法论结合的例子">方法论结合的例子
+&lt;/h2>&lt;p>场景：我们还是以A公司举例，它是一家初创公司希望提升产品市场份额，那么该如何做呢？&lt;/p>
+&lt;h3 id="step-1-用-swot-分析公司现状">Step 1: 用 SWOT 分析公司现状
+&lt;/h3>&lt;p>我们先分析公司的内外部环境，明确当前的优劣势及机会与威胁。&lt;/p>
+&lt;p>&lt;strong>SWOT 分析结果&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>优势 (Strengths)&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>产品技术领先，具有独特功能。&lt;/li>
+&lt;li>团队年轻且充满活力，适应市场变化快。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>劣势 (Weaknesses)&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>品牌知名度较低，缺乏用户信任。&lt;/li>
+&lt;li>市场营销经验不足，预算有限。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>机会 (Opportunities)&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>市场需求增长，目标用户数量增加。&lt;/li>
+&lt;li>社交媒体平台提供了低成本宣传机会。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>威胁 (Threats)&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>竞争对手产品更成熟，且已有稳定用户群。&lt;/li>
+&lt;li>行业法规可能导致未来的产品合规性风险。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="step-2-用-scqa-框架明确关键问题和目标">Step 2: 用 SCQA 框架明确关键问题和目标
+&lt;/h3>&lt;p>通过 &lt;strong>SCQA 框架&lt;/strong>，清晰表达背景、问题和解决方案：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>情境 (Situation)&lt;/strong>：市场需求旺盛，公司产品技术领先，但用户渗透率低。&lt;/li>
+&lt;li>&lt;strong>冲突 (Complication)&lt;/strong>：资源有限且竞争激烈，品牌认知度低，难以快速扩大用户群。&lt;/li>
+&lt;li>&lt;strong>问题 (Question)&lt;/strong>：如何在预算有限的情况下，通过有效策略吸引核心用户、提升品牌影响力，实现市场份额增长？&lt;/li>
+&lt;li>&lt;strong>答案 (Answer)&lt;/strong>：制定低成本营销策略，聚焦核心用户群，提升品牌影响力，优化用户体验。&lt;br>
+&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/SCQA.png"
+width="1468"
+height="830"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/SCQA_hu_512e7972c2e864c2.png 480w, https://betterthantomorrow.top/zh-cn/p/think006/SCQA_hu_ca1e6e3d3ad441b2.png 1024w"
+loading="lazy"
+alt="SCQA"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="424px"
+>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="step-3-用-mece-法则拆解问题">Step 3: 用 MECE 法则拆解问题
+&lt;/h3>&lt;p>按照 &lt;strong>MECE 法则&lt;/strong>，将问题分解为互斥且完全穷尽的子问题：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>目标用户&lt;/strong>：哪些用户群体是我们的核心市场？&lt;/li>
+&lt;li>&lt;strong>营销渠道&lt;/strong>：哪些渠道可以以最低成本接触最多用户？&lt;/li>
+&lt;li>&lt;strong>品牌塑造&lt;/strong>：如何提升品牌知名度并增强用户信任？&lt;/li>
+&lt;li>&lt;strong>产品优化&lt;/strong>：如何优化现有产品以提高用户满意度？&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h3 id="step-4-用-smart-原则设定目标">Step 4: 用 SMART 原则设定目标
+&lt;/h3>&lt;p>根据两种 &lt;strong>SMART 原则&lt;/strong>，为每个子问题设定目标并执行行动计划：&lt;/p>
+&lt;hr>
+&lt;h4 id="1-基于-star-框架的-smart-设定">1. &lt;strong>基于 STAR 框架的 SMART 设定&lt;/strong>
+&lt;/h4>&lt;p>&lt;strong>S - 情境 (Situation)&lt;/strong>&lt;br>
+公司是一家初创企业，技术产品具有独特优势，但因品牌知名度不足，用户留存率较低，市场份额未达预期。&lt;/p>
+&lt;p>&lt;strong>T - 任务 (Task)&lt;/strong>&lt;br>
+通过低成本的营销策略，在 3 个月内提升品牌知名度和核心用户留存率，实现市场份额增长 8%。&lt;/p>
+&lt;p>&lt;strong>A - 行动 (Action)&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>目标用户定位&lt;/strong>：分析用户行为数据，锁定 25-35 岁注重性价比的年轻用户群体，并调整营销策略。&lt;/li>
+&lt;li>&lt;strong>社交媒体推广&lt;/strong>：设计 5 次低成本广告活动，与 KOL 合作发布产品评测内容，强化品牌信任感。&lt;/li>
+&lt;li>&lt;strong>功能优化与用户激励&lt;/strong>：基于用户反馈，在两周内上线高需求功能，并推出会员折扣活动。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>R - 结果 (Result)&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>新增核心用户 12,000 名，超额完成目标（10,000 名）。&lt;/li>
+&lt;li>广告覆盖量达到 150 万次，转化率提高 20%。&lt;/li>
+&lt;li>产品市场份额增长 8%，并新增两家战略合作伙伴。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/smart.png"
+width="1207"
+height="799"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/smart_hu_1039529de5a1d8f2.png 480w, https://betterthantomorrow.top/zh-cn/p/think006/smart_hu_426c7fc309028e70.png 1024w"
+loading="lazy"
+alt="smart"
+class="gallery-image"
+data-flex-grow="151"
+data-flex-basis="362px"
+>&lt;/p>
+&lt;h4 id="2-基于-specific-measurable-achievable-relevant-time-bound-的-smart-设定">2. &lt;strong>基于 Specific, Measurable, Achievable, Relevant, Time-bound 的 SMART 设定&lt;/strong>
+&lt;/h4>&lt;ul>
+&lt;li>&lt;strong>Specific（具体）&lt;/strong>：通过社交媒体广告和用户反馈优化活动，在 3 个月内吸引核心用户群并提升品牌知名度。&lt;/li>
+&lt;li>&lt;strong>Measurable（可测量）&lt;/strong>：新增用户 10,000 名，广告覆盖量 100 万次，活动转化率 15%。&lt;/li>
+&lt;li>&lt;strong>Achievable（可实现）&lt;/strong>：以过往数据和预算为基础，目标设定合理可行。&lt;/li>
+&lt;li>&lt;strong>Relevant（相关性）&lt;/strong>：该目标支持公司战略，直接提升市场份额和品牌影响力。&lt;/li>
+&lt;li>&lt;strong>Time-bound（有时限）&lt;/strong>：完成目标的时间为 3 个月，并在每月评估进展。
+&lt;img src="https://betterthantomorrow.top/zh-cn/p/think006/think006.png"
+width="1663"
+height="755"
+srcset="https://betterthantomorrow.top/zh-cn/p/think006/think006_hu_46f6fd7799a0480a.png 480w, https://betterthantomorrow.top/zh-cn/p/think006/think006_hu_61e67400a847a447.png 1024w"
+loading="lazy"
+alt="如何在预算有限的情况下提升产品市场份额？"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/li>
+&lt;/ul>
+&lt;h2 id="尾声">尾声
+&lt;/h2>&lt;p>我举这个例子是希望告诉自己也告诉大家，&lt;strong>方法论是一种工具&lt;/strong>,不要被工具框死了自己的思维适用自己有效果就好，而是要灵活运用，结合实际情况，找到最适合自己的解决方案。&lt;/p></description></item><item><title>用SWOT分析法轻松破解难题</title><link>https://betterthantomorrow.top/zh-cn/p/think005/</link><pubDate>Thu, 16 Jan 2025 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/think005/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think005/think005-cover.jpg" alt="Featured image of post 用SWOT分析法轻松破解难题" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在之前的文章中,我们探讨了&lt;a class="link" href="https://betterthantomorrow.top/zh-cn/p/think004/" target="_blank" rel="noopener"
+>SCQA&lt;/a>使用这个方法来将复杂的问题清晰化，这次我们来看新的方法论SWOT分析法。&lt;/p>
+&lt;p>在开始介绍之前，我还是想在重复一下那句话，独立思考是一种能力，而方法论是一种工具。熟练使用工具，能帮助我们理清复杂问题，找到更有针对性的解决方案，希望大家和我一起能通过实践收获新知。&lt;/p>
+&lt;h2 id="为什么选择swot分析法">为什么选择SWOT分析法？
+&lt;/h2>&lt;p>与SCQA类似，SWOT主要是由四个要素组成，分别是：&lt;/p>
+&lt;ul>
+&lt;li>Strengths（优势）&lt;/li>
+&lt;li>Weaknesses（劣势）&lt;/li>
+&lt;li>Opportunities（机会）&lt;/li>
+&lt;li>Threats（威胁）&lt;/li>
+&lt;/ul>
+&lt;p>通过这个方法无论是个人职业规划、公司战略制定，还是项目风险评估，SWOT分析法都能提供清晰的逻辑框架。&lt;/p>
+&lt;p>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think005/swot.png"
+width="1024"
+height="769"
+srcset="https://betterthantomorrow.top/zh-cn/p/think005/swot_hu_a529a45ded0e77a3.png 480w, https://betterthantomorrow.top/zh-cn/p/think005/swot_hu_d0ab383d9a68b843.png 1024w"
+loading="lazy"
+alt="swot"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;h2 id="如何使用swot分析法">如何使用SWOT分析法？
+&lt;/h2>&lt;p>以个人举例让我们看下面的例子：
+销售经理案例背景：作为一家互联网公司的销售经理为了更好地规划个人职业路径，他借助SWOT分析法理清现状：&lt;/p>
+&lt;ul>
+&lt;li>Strengths（优势）：我有丰富的销售经验，擅长客户沟通。&lt;/li>
+&lt;li>Weaknesses（劣势）：我对市场变化的敏感度不够，缺乏团队管理经验。&lt;/li>
+&lt;li>Opportunities（机会）：公司业务拓展迅速，需要大量销售人员。&lt;/li>
+&lt;li>Threats（威胁）：市场竞争激烈，新兴公司崛起。&lt;/li>
+&lt;/ul>
+&lt;p>在让我们看另外一个例子这次我们以公司为例：
+公司A是一家新创公司，我们可以用SWOT分析法来分析公司A的发展：&lt;/p>
+&lt;ul>
+&lt;li>Strengths（优势）：公司A有技术优势，团队年轻有活力。&lt;/li>
+&lt;li>Weaknesses（劣势）：公司A缺乏市场经验，资金短缺。&lt;/li>
+&lt;li>Opportunities（机会）：市场需求旺盛，政策支持力度大。&lt;/li>
+&lt;li>Threats（威胁）：市场竞争激烈，行业监管政策不明朗。&lt;/li>
+&lt;/ul>
+&lt;p>通过上述的例子我们可以看到，SWOT分析法可以帮助我们全面了解问题的内外部环境，帮助我们更好地制定战略，提高决策的准确性。
+相对于SCQA来说，SWOT更注重对内外部环境的全面分析，而SCQA偏向于问题逻辑的梳理。&lt;/p>
+&lt;h2 id="扩展">扩展
+&lt;/h2>&lt;p>通过这些方法论我们可以快速的解决现有发生的问题同时辅助决策，但是更为重要的是，在制定好方案或战略需要快速的执行，因为只有执行才能让我们的想法变为现实，所以希望大家在实践的过程中多多思考，多多实践，让我们的想法变为现实！&lt;/p></description></item><item><title>从复杂到清晰：SCQA如何助你解决问题</title><link>https://betterthantomorrow.top/zh-cn/p/think004/</link><pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/think004/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think004/think004-cover.jpg" alt="Featured image of post 从复杂到清晰：SCQA如何助你解决问题" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在之前的文章中，我们探讨了独立思考的重要性以及如何通过方法论提升思维能力。独立思考好比是一种能力，而方法论则是一种工具，帮助我们更好地理解问题，提出更有针对性的解决方案。今天我们就来探讨一种思考问题的方法论——SCQA。&lt;/p>
+&lt;h2 id="为什么选择scqa">为什么选择SCQA？
+&lt;/h2>&lt;p>你是否曾经遇到以下情境：&lt;/p>
+&lt;ul>
+&lt;li>面对复杂问题，难以找到核心矛盾？&lt;/li>
+&lt;li>解决方案缺乏针对性，效果不理想？
+SCQA模型能帮助你剖析问题本质，快速找到有效的解决路径。&lt;/li>
+&lt;/ul>
+&lt;h2 id="什么是scqa">什么是SCQA?
+&lt;/h2>&lt;p>&lt;strong>SCQA&lt;/strong>模型是一种思考问题的方法论，它可以帮助我们更好地理解问题的本质，提出更有针对性的解决方案。SCQA是由以下四个步骤组成的：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>S&lt;/strong>：Situation（情况）：描述问题的背景和现状。&lt;/li>
+&lt;li>&lt;strong>C&lt;/strong>：Complication（复杂性、冲突或矛盾）： 描述问题的复杂性、冲突或矛盾。&lt;/li>
+&lt;li>&lt;strong>Q&lt;/strong>：Question（问题）：提出问题的关键点和核心问题。&lt;/li>
+&lt;li>&lt;strong>A&lt;/strong>：Answer（答案）：给出解决问题的方法和答案。&lt;/li>
+&lt;/ul>
+&lt;p>通过这一模型，我们可以像讲故事一样，清晰地分析问题并制定方案。&lt;/p>
+&lt;h2 id="scqa模型的应用场景">SCQA模型的应用场景
+&lt;/h2>&lt;p>我们先从一个广告用语开始，然后再用SCQA模型来分析这个广告用语。
+广告用语：「一杯奶茶，一种心情」&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>S&lt;/strong>：Situation（情况）：一杯奶茶&lt;/li>
+&lt;li>&lt;strong>C&lt;/strong>：Complication（复杂性、冲突或矛盾）：市场上有很多品牌的奶茶，为什么要选择这一杯奶茶？&lt;/li>
+&lt;li>&lt;strong>Q&lt;/strong>：Question（问题）：奶茶和心情之间有什么联系？&lt;/li>
+&lt;li>&lt;strong>A&lt;/strong>：Answer（答案）：奶茶可以带来一种心情，奶茶和心情之间有一种联系。&lt;/li>
+&lt;/ul>
+&lt;p>按如果用在工作中，假设我是一名销售经理，我需要分析一下销售团队的业绩为什么下滑，我可以用SCQA模型来分析：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>S&lt;/strong>：Situation（情况）：销售团队环比之前季度的业绩下滑了10%。&lt;/li>
+&lt;li>&lt;strong>C&lt;/strong>：Complication（冲突或矛盾）：销售团队的业绩下滑了，但是之前的销售策略是有效的。&lt;/li>
+&lt;li>&lt;strong>Q&lt;/strong>：Question（问题）：销售团队的业绩下滑的原因是什么？&lt;/li>
+&lt;li>&lt;strong>A&lt;/strong>：Answer（答案）：销售团队的业绩下滑的原因可能是市场竞争激烈，市场在不断变化，需要调整销售策略。&lt;/li>
+&lt;/ul>
+&lt;p>SCQA模型其实是一种故事性的表达方式，通过情境、复杂性、问题和答案四个要素，将问题进行了分解，帮助我们更好地理解问题的本质，提出更有针对性的解决方案。&lt;/p>
+&lt;h3 id="可视化理解scqa框架">可视化理解：SCQA框架
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>模块&lt;/th>
+&lt;th>核心问题&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>情况 (S)&lt;/strong>&lt;/td>
+&lt;td>描述背景&lt;/td>
+&lt;td>市场竞争激烈&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>复杂性 (C)&lt;/strong>&lt;/td>
+&lt;td>矛盾或问题点&lt;/td>
+&lt;td>传统策略失效&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>问题 (Q)&lt;/strong>&lt;/td>
+&lt;td>核心问题&lt;/td>
+&lt;td>需要调整的策略是什么？&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>答案 (A)&lt;/strong>&lt;/td>
+&lt;td>提供解决方案&lt;/td>
+&lt;td>研发新销售手段&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="实操指南">实操指南
+&lt;/h3>&lt;ol>
+&lt;li>&lt;strong>明确背景&lt;/strong>：写下当前情境的核心描述。&lt;/li>
+&lt;li>&lt;strong>发现矛盾&lt;/strong>：列出现有问题的冲突点。&lt;/li>
+&lt;li>&lt;strong>定义问题&lt;/strong>：将核心问题转化为可操作的提问。&lt;/li>
+&lt;li>&lt;strong>制定答案&lt;/strong>：基于问题提出具体、可行的解决方案。&lt;/li>
+&lt;/ol>
+&lt;h2 id="scqa的扩展">SCQA的扩展
+&lt;/h2>&lt;p>SCQA模型也可以扩展为SCQAD模型，其中D代表Decision（决策），即在提出问题和给出答案的基础上，再加上决策的要素。这样可以更全面地分析问题，提出更有效的解决方案。
+通过SCQA我们找到了事情的本质与冲突，为什么发生的原因，从而促使了D（决策）的出现，也就是解决方案。同样的这个也可以适用于挖掘市场需求，产品设计等等，希望大家可以多多尝试。&lt;/p></description></item><item><title>什么是SMART法则?</title><link>https://betterthantomorrow.top/zh-cn/p/think002/</link><pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate><author>your-email@example.com (Your Name)</author><guid>https://betterthantomorrow.top/zh-cn/p/think002/</guid><description>&lt;img src="https://betterthantomorrow.top/zh-cn/p/think002/think002-cover.jpg" alt="Featured image of post 什么是SMART法则?" />&lt;p>思维方式从某种方面来说是一种捷径，在不同的角度来看待问题，会有不同的解决方案。在这篇文章中，我们将讨论SMART法则，这是一种目标设定的方法，它可以帮助你制定具体、可衡量、可实现、相关和时限的目标。在本文中，我们将深入探讨SMART法则的含义、优势和应用，帮助你更好地实现自己的目标。&lt;/p>
+&lt;h2 id="star法则">STAR法则：
+&lt;/h2>&lt;p>STAR法则是一种结构化方法，它帮助应聘者、教育工作者、讲师等等工作中更清晰、更有逻辑地展示自己的经验和能力。以下是STAR法则的运用方法及其转为的描述：&lt;/p>
+&lt;p>&lt;strong>S - 情境（Situation）：&lt;/strong>描述背景情况，包括你所处的环境和面临的问题。&lt;/p>
+&lt;p>&lt;strong>T - 任务（Task）：&lt;/strong>阐述你需要完成的任务或目标，以及面临的挑战。&lt;/p>
+&lt;p>&lt;strong>A - 行动（Action）：&lt;/strong>说明你为了解决问题采取了哪些具体行动，包括你的思考过程和实际操作。&lt;/p>
+&lt;p>&lt;strong>R - 结果（Result）：&lt;/strong>展示你的行动带来的结果，包括积极的影响和可能的后续效应。&lt;/p>
+&lt;h3 id="如何使用star法则">如何使用STAR法则：
+&lt;/h3>&lt;h4 id="范例一应征业务主管">范例一（应征业务主管）：
+&lt;/h4>&lt;p>S：2017年，XX市场正逢行业低谷。&lt;br>
+T：我当时担任业务开发专员，负责某区域的业务拓展，带领10人团队，目标是达成公司年度业绩。&lt;br>
+A：因此，我提出了A计划，并带领团队开拓新客户。&lt;br>
+R：由于我的领导和执行能力，最终在台北新开了5家分店，为公司当年带来了200%的营收增长。&lt;/p>
+&lt;h4 id="范例二说明在xx活动中的工作">范例二（说明在XX活动中的工作）：
+&lt;/h4>&lt;p>S：公司最近决定对组织管理进行全面审查。&lt;br>
+T：主管要求我在一周内完成员工对公司满意度的调查。&lt;br>
+A：我选择使用更环保、高效的在线问卷代替传统的纸质问卷。我花了一天时间设计问卷，并请擅长网页编辑的同事协助。我们用两天时间通过电子邮件通知全体员工填写问卷，并在七天内回收和分析数据。&lt;br>
+R：我按时提交了调查结果，主管对我的在线问卷方法给予了高度评价，并指示今后都应采用这种方法进行员工满意度调查。&lt;/p>
+&lt;h3 id="范例三-讲解ppt的案例">范例三 （讲解PPT的案例）
+&lt;/h3>&lt;p>S：我在上周五的公司会议上做了一个关于新产品推广的PPT。
+T：我需要在10分钟内向公司高管展示我们的新产品推广计划。
+A：我花了一天时间准备PPT，包括产品介绍、市场分析、推广策略和预算计划。我还请同事帮忙检查语法错误和排版问题。
+R：我的PPT得到了高管的认可，他们对我的推广策略和预算计划给予了高度评价，并决定立即实施。&lt;/p>
+&lt;h3 id="从star到start">从STAR到START：
+&lt;/h3>&lt;p>那么其实在STAR的基础上，还可以加上T，变成START法则，
+最后一个T代表&lt;strong>Thinking（思考）&lt;/strong>，即通过这件事情你有哪些思考？做得好的地方在哪里？哪里做得不好？下次如何改进？这段经历未来可以应用在哪些场合？&lt;br>
+但是不论是STAR还是START，它们都只是帮助你梳理思路的工具，&lt;strong>独立思考永远要比机械地套用模板更有说服力&lt;/strong>，这是最重要的一点&lt;/p></description></item></channel></rss>
