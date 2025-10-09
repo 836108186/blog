@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 import { DEFAULT_LOCALE, Locale, getLocaleFromPath, normalizeLocale } from '@/lib/i18n'
@@ -76,33 +76,43 @@ type I18nCtx = {
 const Ctx = createContext<I18nCtx | null>(null)
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE)
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window !== 'undefined') {
+      return getLocaleFromPath(window.location.pathname)
+    }
+    return DEFAULT_LOCALE
+  })
   const pathname = usePathname()
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const saved = localStorage.getItem('locale')
-    const fromPath = getLocaleFromPath(window.location.pathname)
-    if (saved) {
-      setLocale(normalizeLocale(saved))
-    } else {
-      setLocale(fromPath)
-    }
+  const updateLocale = useCallback((next: Locale) => {
+    setLocaleState((prev) => {
+      const normalized = normalizeLocale(next)
+      return prev === normalized ? prev : normalized
+    })
   }, [])
+
+  const updateLocaleFromPath = useCallback(
+    (path?: string | null) => {
+      const nextLocale = getLocaleFromPath(path)
+      updateLocale(nextLocale)
+    },
+    [updateLocale]
+  )
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('locale', locale)
-      const html = window.document.documentElement
+      updateLocaleFromPath(window.location.pathname)
+    } else {
+      updateLocaleFromPath(pathname)
+    }
+  }, [pathname, updateLocaleFromPath])
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      const html = document.documentElement
       html.lang = locale === 'zh' ? 'zh-CN' : 'en-US'
     }
   }, [locale])
-
-  useEffect(() => {
-    if (!pathname) return
-    const nextLocale = getLocaleFromPath(pathname)
-    setLocale(nextLocale)
-  }, [pathname])
 
   const t = React.useCallback<I18nCtx['t']>(
     (key, vars) => {
@@ -117,10 +127,10 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     () => ({
       locale,
       t,
-      setLocale,
-      toggleLocale: () => setLocale((p) => (p === 'en' ? 'zh' : 'en')),
+      setLocale: updateLocale,
+      toggleLocale: () => updateLocale(locale === 'en' ? 'zh' : 'en'),
     }),
-    [locale, t]
+    [locale, t, updateLocale]
   )
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>

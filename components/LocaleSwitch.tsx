@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { localizePath, normalizeLocale, stripLocaleFromPath } from '@/lib/i18n'
 
 export default function LocaleSwitch() {
-  const { locale } = useI18n()
+  const { locale, setLocale } = useI18n()
   const router = useRouter()
   const pathname = usePathname()
   const normalized = normalizeLocale(locale)
@@ -14,6 +14,7 @@ export default function LocaleSwitch() {
   const toggleLocale = () => {
     const basePath = stripLocaleFromPath(pathname || '/')
     const nextLocale = isZh ? 'en' : 'zh'
+    setLocale(nextLocale)
     router.push(localizePath(basePath, nextLocale))
   }
   return (
