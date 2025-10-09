@@ -12,6 +12,8 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import I18nProvider from './providers/I18nProvider'
+import { getSiteMetadata } from '@/lib/site'
+import { isLocale, normalizeLocale } from '@/lib/i18n'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -59,12 +61,23 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: { locale?: string }
+}) {
   const basePath = process.env.BASE_PATH || ''
+  const initialLocale =
+    params?.locale && isLocale(params.locale)
+      ? params.locale
+      : normalizeLocale(siteMetadata.defaultLocale)
+  const localizedMetadata = getSiteMetadata(initialLocale)
 
   return (
     <html
-      lang={siteMetadata.language}
+      lang={localizedMetadata.language}
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
@@ -96,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        <I18nProvider>
+        <I18nProvider initialLocale={initialLocale}>
           <ThemeProviders>
             <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
             <SectionContainer>

@@ -75,9 +75,19 @@ type I18nCtx = {
 
 const Ctx = createContext<I18nCtx | null>(null)
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
+type I18nProviderProps = {
+  children: React.ReactNode
+  initialLocale?: string | null
+}
+
+export function I18nProvider({ children, initialLocale }: I18nProviderProps) {
   const pathname = usePathname()
-  const [locale, setLocaleState] = useState<Locale>(() => getLocaleFromPath(pathname))
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (initialLocale) {
+      return normalizeLocale(initialLocale)
+    }
+    return getLocaleFromPath(pathname)
+  })
 
   const updateLocale = useCallback((next: Locale) => {
     setLocaleState((prev) => {
@@ -88,6 +98,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   const updateLocaleFromPath = useCallback(
     (path?: string | null) => {
+      if (!path) return
       const nextLocale = getLocaleFromPath(path)
       updateLocale(nextLocale)
     },
