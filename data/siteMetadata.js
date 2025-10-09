@@ -4,7 +4,7 @@ const siteMetadata = {
   author: '子小言记',
   headerTitle: '小言集',
   description: '边走边写，边写边想',
-  language: 'en-us',
+  language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',

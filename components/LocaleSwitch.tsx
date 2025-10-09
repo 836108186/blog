@@ -1,9 +1,17 @@
 'use client'
 
 import { useI18n } from '@/app/providers/I18nProvider'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function LocaleSwitch() {
-  const { locale, toggleLocale } = useI18n()
+  const { locale } = useI18n()
+  const router = useRouter()
+  const pathname = usePathname()
+  const isZh = pathname?.toLowerCase().startsWith('/zh')
+  const toggleLocale = () => {
+    const nextPath = isZh ? pathname.replace(/^\/zh(-[a-z]{2})?/, '') || '/' : `/zh${pathname}`
+    router.push(nextPath)
+  }
   return (
     <button
       onClick={toggleLocale}

@@ -1,7 +1,11 @@
+'use client'
 /* eslint-disable jsx-a11y/anchor-has-content */
 import Link from 'next/link'
 import type { LinkProps } from 'next/link'
 import { AnchorHTMLAttributes } from 'react'
+
+// 替换：import { useRouter } from 'next/router'
+import { useRouter, usePathname } from 'next/navigation'
 
 const CustomLink = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
   const isInternalLink = href && href.startsWith('/')

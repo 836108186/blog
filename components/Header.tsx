@@ -1,11 +1,14 @@
+'use client'
 import siteMetadata from '@/data/siteMetadata'
-import headerNavLinks from '@/data/headerNavLinks'
+// import { getHeaderNavLinks } from '@/data/headerNavLinks'
+import * as headerNav from '@/data/headerNavLinks'
 import Image from 'next/image'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 
 // 在 Header 中动态导入，禁用 SSR
 const LocaleSwitch = dynamic(() => import('@/components/LocaleSwitch'))
@@ -15,6 +18,11 @@ const Header = () => {
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
+
+  const pathname = usePathname()
+  const locale = pathname && pathname.toLowerCase().startsWith('/zh') ? 'zh' : 'en'
+  const navLinks =
+    (headerNav as any).getHeaderNavLinks?.(locale) ?? (headerNav as any).default
 
   return (
     <header className={headerClass}>
@@ -43,7 +51,7 @@ const Header = () => {
       </Link>
       <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">
         <div className="no-scrollbar hidden max-w-40 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
-          {headerNavLinks
+          {navLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
               <Link
