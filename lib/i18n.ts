@@ -11,6 +11,10 @@ function resolveLocaleToken(input?: string | null): Locale | null {
   return null
 }
 
+export function isLocale(input?: string | null): input is Locale {
+  return resolveLocaleToken(input) !== null
+}
+
 export function normalizeLocale(input?: string | null): Locale {
   return resolveLocaleToken(input) ?? DEFAULT_LOCALE
 }
