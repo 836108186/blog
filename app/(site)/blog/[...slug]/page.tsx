@@ -14,6 +14,7 @@ import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { getSiteMetadata } from '@/lib/site'
 import { notFound } from 'next/navigation'
+import { DEFAULT_LOCALE, isLocale } from '@/lib/i18n'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -76,8 +77,15 @@ export async function generateMetadata(props: {
   }
 }
 
+export const getBlogStaticParams = (locale?: string) => {
+  const targetLocale = locale && isLocale(locale) ? locale : DEFAULT_LOCALE
+  return allBlogs
+    .filter((post) => (post.lang ?? 'en').toLowerCase().startsWith(targetLocale))
+    .map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
+}
+
 export const generateStaticParams = async () => {
-  return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
+  return getBlogStaticParams()
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {

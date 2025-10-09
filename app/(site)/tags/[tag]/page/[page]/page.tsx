@@ -4,11 +4,19 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
 import { notFound } from 'next/navigation'
+import { DEFAULT_LOCALE, isLocale } from '@/lib/i18n'
 
 const POSTS_PER_PAGE = 5
 
-export const generateStaticParams = async () => {
-  const tagCounts = tagData as Record<string, number>
+const countsByLocale = tagData as Record<string, Record<string, number>>
+
+const getTagCounts = (locale?: string) => {
+  const targetLocale = locale && isLocale(locale) ? locale : DEFAULT_LOCALE
+  return countsByLocale[targetLocale] ?? {}
+}
+
+export const getTagPageStaticParams = (locale?: string) => {
+  const tagCounts = getTagCounts(locale)
   return Object.keys(tagCounts).flatMap((tag) => {
     const postCount = tagCounts[tag]
     const totalPages = Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
@@ -19,15 +27,22 @@ export const generateStaticParams = async () => {
   })
 }
 
-export default async function TagPage(props: { params: Promise<{ tag: string; page: string }> }) {
+export const generateStaticParams = async () => {
+  return getTagPageStaticParams()
+}
+
+export default async function TagPage(props: {
+  params: Promise<{ tag: string; page: string; locale?: string }>
+}) {
   const params = await props.params
   const tag = decodeURI(params.tag)
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const pageNumber = parseInt(params.page)
+  const locale = params.locale && isLocale(params.locale) ? params.locale : DEFAULT_LOCALE
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
-  )
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
+  ).filter((post) => (post.lang ?? 'en').toLowerCase().startsWith(locale))
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE))
 
   // Return 404 for invalid page numbers or empty pages
   if (pageNumber <= 0 || pageNumber > totalPages || isNaN(pageNumber)) {

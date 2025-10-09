@@ -68,11 +68,6 @@ module.exports = () => {
     basePath,
     reactStrictMode: true,
     trailingSlash: false,
-    i18n: {
-      locales: ['zh', 'en'],
-      defaultLocale: 'zh',
-      localeDetection: false,
-    },
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
