@@ -18,7 +18,8 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
-  const { slug, title, images } = content
+  const { slug, title, images, lang } = content
+  const locale = (lang ?? 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
 
@@ -51,6 +52,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${prev.path}`}
+                    locale={locale}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                     aria-label={`Previous post: ${prev.title}`}
                   >
@@ -62,6 +64,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${next.path}`}
+                    locale={locale}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                     aria-label={`Next post: ${next.title}`}
                   >

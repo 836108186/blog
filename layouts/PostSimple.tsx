@@ -17,7 +17,8 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title } = content
+  const { path, slug, date, title, lang } = content
+  const locale = (lang ?? 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
 
   return (
     <SectionContainer>
@@ -54,6 +55,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${prev.path}`}
+                      locale={locale}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Previous post: ${prev.title}`}
                     >
@@ -65,6 +67,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${next.path}`}
+                      locale={locale}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                       aria-label={`Next post: ${next.title}`}
                     >

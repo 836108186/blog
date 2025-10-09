@@ -42,15 +42,53 @@ const icon = fromHtmlIsomorphic(
   { fragment: true }
 )
 
+const SUPPORTED_CONTENT_LOCALES = ['zh', 'en']
+
+function resolveContentLocale(doc: { lang?: string | null; _raw: { flattenedPath: string } }) {
+  const frontmatterLocale = typeof doc.lang === 'string' ? doc.lang.toLowerCase() : ''
+  if (frontmatterLocale.startsWith('zh')) return 'zh'
+  if (frontmatterLocale.startsWith('en')) return 'en'
+
+  const flattened = doc._raw.flattenedPath.replace(/^blog\//, '')
+  const segments = flattened.split('/').filter(Boolean)
+  if (segments.length > 0 && SUPPORTED_CONTENT_LOCALES.includes(segments[0].toLowerCase())) {
+    return segments[0].toLowerCase()
+  }
+  return 'en'
+}
+
+function resolveSlugSegments(doc: { lang?: string | null; _raw: { flattenedPath: string } }) {
+  const flattened = doc._raw.flattenedPath.replace(/^blog\//, '')
+  const segments = flattened.split('/').filter(Boolean)
+  if (segments.length > 0 && SUPPORTED_CONTENT_LOCALES.includes(segments[0].toLowerCase())) {
+    return segments.slice(1)
+  }
+  return segments
+}
+
 const computedFields: ComputedFields = {
   readingTime: { type: 'json', resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    resolve: (doc) => resolveSlugSegments(doc).join('/'),
   },
   path: {
     type: 'string',
-    resolve: (doc) => doc._raw.flattenedPath,
+    resolve: (doc) => {
+      const locale = resolveContentLocale(doc)
+      const slugSegments = resolveSlugSegments(doc)
+      const slugPath = slugSegments.join('/')
+
+      if (!slugPath) {
+        return locale === 'zh' ? 'blog' : `${locale}/blog`
+      }
+
+      if (locale === 'zh') {
+        return `blog/${slugPath}`
+      }
+
+      return `${locale}/blog/${slugPath}`
+    },
   },
   filePath: {
     type: 'string',

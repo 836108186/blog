@@ -30,8 +30,13 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
-  const basePath = path.split('/')[0]
+  const { filePath, path, slug, date, title, tags, lang } = content
+  const locale = (lang ?? 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  const pathSegments = path.split('/').filter(Boolean)
+  if (locale !== 'zh' && pathSegments[0] === locale) {
+    pathSegments.shift()
+  }
+  const basePath = pathSegments[0] ?? 'blog'
 
   return (
     <SectionContainer>
@@ -120,7 +125,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
+                        <Tag key={tag} text={tag} locale={locale} />
                       ))}
                     </div>
                   </div>
@@ -133,7 +138,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           Previous Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
+                          <Link href={`/${prev.path}`} locale={locale}>
+                            {prev.title}
+                          </Link>
                         </div>
                       </div>
                     )}
@@ -143,7 +150,9 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           Next Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
+                          <Link href={`/${next.path}`} locale={locale}>
+                            {next.title}
+                          </Link>
                         </div>
                       </div>
                     )}
@@ -153,6 +162,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
+                  locale={locale}
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label="Back to the blog"
                 >
