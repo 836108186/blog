@@ -4,23 +4,38 @@ import Link from 'next/link'
 import type { LinkProps } from 'next/link'
 import { AnchorHTMLAttributes } from 'react'
 
-// 替换：import { useRouter } from 'next/router'
-import { useRouter, usePathname } from 'next/navigation'
+import { localizePath, normalizeLocale } from '@/lib/i18n'
 
-const CustomLink = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
-  const isInternalLink = href && href.startsWith('/')
-  const isAnchorLink = href && href.startsWith('#')
+type CustomLinkProps = LinkProps &
+  AnchorHTMLAttributes<HTMLAnchorElement> & { locale?: string | null }
+
+const CustomLink = ({ href, locale, ...rest }: CustomLinkProps) => {
+  const normalizedLocale = locale ? normalizeLocale(locale) : undefined
+  let finalHref: typeof href = href
+
+  if (typeof href === 'string' && normalizedLocale && href.startsWith('/')) {
+    finalHref = localizePath(href, normalizedLocale)
+  }
+
+  const isInternalLink = typeof finalHref === 'string' && finalHref.startsWith('/')
+  const isAnchorLink = typeof finalHref === 'string' && finalHref.startsWith('#')
 
   if (isInternalLink) {
-    return <Link className="break-words" href={href} {...rest} />
+    return <Link className="break-words" href={finalHref} {...rest} />
   }
 
   if (isAnchorLink) {
-    return <a className="break-words" href={href} {...rest} />
+    return <a className="break-words" href={finalHref} {...rest} />
   }
 
   return (
-    <a className="break-words" target="_blank" rel="noopener noreferrer" href={href} {...rest} />
+    <a
+      className="break-words"
+      target="_blank"
+      rel="noopener noreferrer"
+      href={typeof finalHref === 'string' ? finalHref : undefined}
+      {...rest}
+    />
   )
 }
 

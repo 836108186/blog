@@ -85,6 +85,18 @@ module.exports = () => {
       ],
       unoptimized,
     },
+    async rewrites() {
+      return [
+        {
+          source: '/:locale(en)',
+          destination: '/',
+        },
+        {
+          source: '/:locale(en)/:path*',
+          destination: '/:path*',
+        },
+      ]
+    },
     async headers() {
       return [
         {
