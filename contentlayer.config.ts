@@ -63,15 +63,17 @@ const computedFields: ComputedFields = {
  * Count the occurrences of all tags across blog posts and write to json file
  */
 async function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
+  const tagCount: Record<string, Record<string, number>> = {}
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
+      const locale = (file.lang || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
+      if (!tagCount[locale]) tagCount[locale] = {}
       file.tags.forEach((tag) => {
         const formattedTag = slug(tag)
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
+        if (formattedTag in tagCount[locale]) {
+          tagCount[locale][formattedTag] += 1
         } else {
-          tagCount[formattedTag] = 1
+          tagCount[locale][formattedTag] = 1
         }
       })
     }
@@ -109,6 +111,7 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    lang: { type: 'string', default: 'en' },
   },
   computedFields: {
     ...computedFields,

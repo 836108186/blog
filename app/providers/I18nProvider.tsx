@@ -1,8 +1,9 @@
 'use client'
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
-type Locale = 'en' | 'zh'
+import { DEFAULT_LOCALE, Locale, getLocaleFromPath, normalizeLocale } from '@/lib/i18n'
 
 type Messages = {
   latest: string
@@ -14,7 +15,14 @@ type Messages = {
   allPostsAria: string
   tags: string
   viewTagged: string // e.g. View posts tagged {tag},
-  description:string
+  description: string
+  searchLabel: string
+  searchPlaceholder: string
+  previous: string
+  next: string
+  paginationStatus: string // e.g. {current} of {total}
+  allPostsLabel: string
+  noTags: string
 }
 
 const messages: Record<Locale, Messages> = {
@@ -28,7 +36,14 @@ const messages: Record<Locale, Messages> = {
     allPostsAria: 'All posts',
     tags: 'Tags',
     viewTagged: 'View posts tagged {tag}',
-    description:'Walking and writing, writing and reflecting.'
+    description: 'Walking and writing, writing and reflecting.',
+    searchLabel: 'Search articles',
+    searchPlaceholder: 'Search articles',
+    previous: 'Previous',
+    next: 'Next',
+    paginationStatus: '{current} of {total}',
+    allPostsLabel: 'All Posts',
+    noTags: 'No tags found.',
   },
   zh: {
     latest: '子小言记的的博客',
@@ -40,7 +55,14 @@ const messages: Record<Locale, Messages> = {
     allPostsAria: '所有文章',
     tags: '标签',
     viewTagged: '查看标签为 {tag} 的文章',
-    description:'边走边写，边写边想',
+    description: '边走边写，边写边想',
+    searchLabel: '搜索文章',
+    searchPlaceholder: '搜索文章',
+    previous: '上一页',
+    next: '下一页',
+    paginationStatus: '{current} / {total}',
+    allPostsLabel: '全部文章',
+    noTags: '暂无标签。',
   },
 }
 
@@ -54,27 +76,42 @@ type I18nCtx = {
 const Ctx = createContext<I18nCtx | null>(null)
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('en')
+  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE)
+  const pathname = usePathname()
 
   useEffect(() => {
-    const saved = (typeof window !== 'undefined' && localStorage.getItem('locale')) as Locale | null
-    if (saved === 'en' || saved === 'zh') {
-      setLocale(saved)
+    if (typeof window === 'undefined') return
+    const saved = localStorage.getItem('locale')
+    const fromPath = getLocaleFromPath(window.location.pathname)
+    if (saved) {
+      setLocale(normalizeLocale(saved))
     } else {
-      const nav = typeof navigator !== 'undefined' ? navigator.language : 'en'
-      setLocale(nav.toLowerCase().startsWith('zh') ? 'zh' : 'en')
+      setLocale(fromPath)
     }
   }, [])
 
   useEffect(() => {
-    if (typeof window !== 'undefined') localStorage.setItem('locale', locale)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('locale', locale)
+      const html = window.document.documentElement
+      html.lang = locale === 'zh' ? 'zh-CN' : 'en-US'
+    }
   }, [locale])
 
-  const t: I18nCtx['t'] = (key, vars) => {
-    const msg = messages[locale][key] as string
-    if (!vars) return msg
-    return msg.replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? ''))
-  }
+  useEffect(() => {
+    if (!pathname) return
+    const nextLocale = getLocaleFromPath(pathname)
+    setLocale(nextLocale)
+  }, [pathname])
+
+  const t = React.useCallback<I18nCtx['t']>(
+    (key, vars) => {
+      const msg = messages[locale][key] as string
+      if (!vars) return msg
+      return msg.replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? ''))
+    },
+    [locale]
+  )
 
   const value = useMemo<I18nCtx>(
     () => ({
@@ -83,7 +120,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       setLocale,
       toggleLocale: () => setLocale((p) => (p === 'en' ? 'zh' : 'en')),
     }),
-    [locale]
+    [locale, t]
   )
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>

@@ -3,14 +3,18 @@
 import { useI18n } from '@/app/providers/I18nProvider'
 import { useRouter, usePathname } from 'next/navigation'
 
+import { localizePath, normalizeLocale, stripLocaleFromPath } from '@/lib/i18n'
+
 export default function LocaleSwitch() {
   const { locale } = useI18n()
   const router = useRouter()
   const pathname = usePathname()
-  const isZh = pathname?.toLowerCase().startsWith('/zh')
+  const normalized = normalizeLocale(locale)
+  const isZh = normalized === 'zh'
   const toggleLocale = () => {
-    const nextPath = isZh ? pathname.replace(/^\/zh(-[a-z]{2})?/, '') || '/' : `/zh${pathname}`
-    router.push(nextPath)
+    const basePath = stripLocaleFromPath(pathname || '/')
+    const nextLocale = isZh ? 'en' : 'zh'
+    router.push(localizePath(basePath, nextLocale))
   }
   return (
     <button

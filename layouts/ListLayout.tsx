@@ -1,13 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
+
+import { useI18n } from '@/app/providers/I18nProvider'
+import { getTagLabel } from '@/data/tagsI18n'
+import { stripLocaleFromPath, localizePath } from '@/lib/i18n'
+import { getSiteMetadata } from '@/lib/site'
 
 interface PaginationProps {
   totalPages: number
@@ -21,13 +25,9 @@ interface ListLayoutProps {
 }
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
+  const { locale, t } = useI18n()
   const pathname = usePathname()
-  const segments = pathname.split('/')
-  const lastSegment = segments[segments.length - 1]
-  const basePath = pathname
-    .replace(/^\//, '') // Remove leading slash
-    .replace(/\/page\/\d+\/?$/, '') // Remove any trailing /page
-    .replace(/\/$/, '') // Remove trailing slash
+  const basePath = stripLocaleFromPath(pathname)
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
@@ -36,28 +36,37 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
       <nav className="flex justify-between">
         {!prevPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            Previous
+            {t('previous')}
           </button>
         )}
         {prevPage && (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={
+              currentPage - 1 === 1
+                ? localizePath(basePath || '/', locale)
+                : localizePath(`${basePath}/page/${currentPage - 1}`, locale)
+            }
             rel="prev"
+            locale={locale}
           >
-            Previous
+            {t('previous')}
           </Link>
         )}
         <span>
-          {currentPage} of {totalPages}
+          {t('paginationStatus', { current: currentPage.toString(), total: totalPages.toString() })}
         </span>
         {!nextPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            Next
+            {t('next')}
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-            Next
+          <Link
+            href={localizePath(`${basePath}/page/${currentPage + 1}`, locale)}
+            rel="next"
+            locale={locale}
+          >
+            {t('next')}
           </Link>
         )}
       </nav>
@@ -72,30 +81,41 @@ export default function ListLayout({
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-  const filteredBlogPosts = posts.filter((post) => {
-    const searchContent = post.title + post.summary + post.tags?.join(' ')
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
-  })
+  const { locale, t } = useI18n()
+  const localizedSite = getSiteMetadata(locale)
 
-  // If initialDisplayPosts exist, display it if no searchValue is specified
+  const filteredBlogPosts = useMemo(() => {
+    return posts
+      .filter((post) => (post.lang ?? 'en') === locale)
+      .filter((post) => {
+        const searchContent = post.title + post.summary + post.tags?.join(' ')
+        return searchContent.toLowerCase().includes(searchValue.toLowerCase())
+      })
+  }, [locale, posts, searchValue])
+
+  const filteredInitialPosts = useMemo(() => {
+    if (!initialDisplayPosts?.length) return []
+    return initialDisplayPosts.filter((post) => (post.lang ?? 'en') === locale)
+  }, [initialDisplayPosts, locale])
+
   const displayPosts =
-    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
+    filteredInitialPosts.length > 0 && !searchValue ? filteredInitialPosts : filteredBlogPosts
 
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-            {title}
+            {title === 'All Posts' ? t('allPostsLabel') : title}
           </h1>
           <div className="relative max-w-lg">
             <label>
-              <span className="sr-only">Search articles</span>
+              <span className="sr-only">{t('searchLabel')}</span>
               <input
-                aria-label="Search articles"
+                aria-label={t('searchLabel')}
                 type="text"
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Search articles"
+                placeholder={t('searchPlaceholder')}
                 className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
               />
             </label>
@@ -116,27 +136,38 @@ export default function ListLayout({
           </div>
         </div>
         <ul>
-          {!filteredBlogPosts.length && 'No posts found.'}
+          {!filteredBlogPosts.length && t('noPosts')}
           {displayPosts.map((post) => {
             const { path, date, title, summary, tags } = post
             return (
               <li key={path} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                   <dl>
-                    <dt className="sr-only">Published on</dt>
+                    <dt className="sr-only">{t('publishedOn')}</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
-                      <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                      <time dateTime={date}>{formatDate(date, localizedSite.language)}</time>
                     </dd>
                   </dl>
                   <div className="space-y-3 xl:col-span-3">
                     <div>
                       <h3 className="text-2xl leading-8 font-bold tracking-tight">
-                        <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
+                        <Link
+                          href={`/${path}`}
+                          locale={locale}
+                          className="text-gray-900 dark:text-gray-100"
+                        >
                           {title}
                         </Link>
                       </h3>
                       <div className="flex flex-wrap">
-                        {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                        {tags?.map((tag) => (
+                          <Tag
+                            key={tag}
+                            text={getTagLabel(tag, locale)}
+                            slugText={tag}
+                            locale={locale}
+                          />
+                        ))}
                       </div>
                     </div>
                     <div className="prose max-w-none text-gray-500 dark:text-gray-400">

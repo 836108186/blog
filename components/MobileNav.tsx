@@ -4,17 +4,15 @@ import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/re
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import { Fragment, useState, useEffect, useRef } from 'react'
 import Link from './Link'
-import * as headerNav from '@/data/headerNavLinks'
-import { usePathname, useRouter } from 'next/navigation'
+import { getHeaderNavLinks } from '@/data/headerNavLinks'
+
+import { useI18n } from '@/app/providers/I18nProvider'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
   const navRef = useRef(null)
-  const pathname = usePathname()
-  const locale = pathname && pathname.toLowerCase().startsWith('/zh') ? 'zh' : 'en'
-  const navLinks =
-    (headerNav as any).getHeaderNavLinks?.(locale) ?? (headerNav as any).default
-  const router = useRouter()
+  const { locale } = useI18n()
+  const navLinks = getHeaderNavLinks(locale)
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -82,6 +80,7 @@ const MobileNav = () => {
                   <Link
                     key={link.title}
                     href={link.href}
+                    locale={locale}
                     className="hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 dark:text-gray-100"
                     onClick={onToggleNav}
                   >

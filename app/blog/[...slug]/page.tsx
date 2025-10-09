@@ -12,6 +12,7 @@ import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
+import { getSiteMetadata } from '@/lib/site'
 import { notFound } from 'next/navigation'
 
 const defaultLayout = 'PostLayout'
@@ -36,6 +37,8 @@ export async function generateMetadata(props: {
     return
   }
 
+  const site = getSiteMetadata(post.lang)
+
   const publishedAt = new Date(post.date).toISOString()
   const modifiedAt = new Date(post.lastmod || post.date).toISOString()
   const authors = authorDetails.map((author) => author.name)
@@ -55,14 +58,14 @@ export async function generateMetadata(props: {
     openGraph: {
       title: post.title,
       description: post.summary,
-      siteName: siteMetadata.title,
-      locale: 'en_US',
+      siteName: site.title,
+      locale: site.locale,
       type: 'article',
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
       url: './',
       images: ogImages,
-      authors: authors.length > 0 ? authors : [siteMetadata.author],
+      authors: authors.length > 0 ? authors : [site.author],
     },
     twitter: {
       card: 'summary_large_image',
@@ -82,14 +85,22 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
+  const post = allBlogs.find((p) => p.slug === slug) as Blog
+  if (!post) {
+    return notFound()
+  }
+
+  const targetLocale = (post.lang || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  const localeCoreContents = sortedCoreContents.filter((entry) =>
+    (entry.lang || 'en').toLowerCase().startsWith(targetLocale)
+  )
+  const postIndex = localeCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {
     return notFound()
   }
 
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
-  const post = allBlogs.find((p) => p.slug === slug) as Blog
+  const prev = localeCoreContents[postIndex + 1]
+  const next = localeCoreContents[postIndex - 1]
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
