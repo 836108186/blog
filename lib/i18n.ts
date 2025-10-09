@@ -3,17 +3,24 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number]
 
 export const DEFAULT_LOCALE: Locale = 'zh'
 
-export function normalizeLocale(input?: string | null): Locale {
-  if (!input) return DEFAULT_LOCALE
+function resolveLocaleToken(input?: string | null): Locale | null {
+  if (!input) return null
   const lower = input.toLowerCase()
-  return lower.startsWith('zh') ? 'zh' : 'en'
+  if (lower.startsWith('zh')) return 'zh'
+  if (lower === 'en' || lower.startsWith('en-')) return 'en'
+  return null
+}
+
+export function normalizeLocale(input?: string | null): Locale {
+  return resolveLocaleToken(input) ?? DEFAULT_LOCALE
 }
 
 export function getLocaleFromPath(pathname?: string | null): Locale {
   if (!pathname) return DEFAULT_LOCALE
   const segments = pathname.split('/').filter(Boolean)
   if (segments.length === 0) return DEFAULT_LOCALE
-  return normalizeLocale(segments[0])
+  const explicit = resolveLocaleToken(segments[0])
+  return explicit ?? DEFAULT_LOCALE
 }
 
 export function stripLocaleFromPath(pathname?: string | null): string {
@@ -21,8 +28,8 @@ export function stripLocaleFromPath(pathname?: string | null): string {
   const ensured = pathname.startsWith('/') ? pathname : `/${pathname}`
   const segments = ensured.split('/').filter(Boolean)
   if (segments.length === 0) return '/'
-  if (SUPPORTED_LOCALES.includes(normalizeLocale(segments[0]))) {
-    const rest = segments.slice(1)
+  const [first, ...rest] = segments
+  if (resolveLocaleToken(first)) {
     return rest.length ? `/${rest.join('/')}` : '/'
   }
   return ensured
