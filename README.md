@@ -11,6 +11,7 @@ single content pipeline powered by Contentlayer and Tailwind CSS.
 - MDX-based posts with KaTeX, syntax highlighting, and multiple layout options
 - Centralized locale utilities for links, static params, and metadata generation
 - Precomputed tag counts per language for fast sidebar and landing-page rendering
+- Built-in [Giscus](https://giscus.app/) integration powered by GitHub Discussions
 
 ## Project structure
 
@@ -87,6 +88,8 @@ home and tag listing pages.
 - `yarn dev` – Start the local development server (runs `build:tags` beforehand)
 - `yarn lint` – Lint and auto-fix the project
 - `yarn build` – Create a production build (requires network access for Google Fonts)
+
+See [如何启用 Giscus 评论](faq/enable-giscus-comments.md) for step-by-step instructions on configuring the comment system.
 
 ## Removed projects page
 
