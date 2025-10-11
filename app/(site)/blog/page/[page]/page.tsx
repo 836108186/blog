@@ -2,14 +2,14 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
 import { notFound } from 'next/navigation'
-import { DEFAULT_LOCALE, isLocale } from '@/lib/i18n'
+import { getDocumentLocale, normalizeLocale, resolveLocaleParam } from '@/lib/i18n'
 
 const POSTS_PER_PAGE = 5
 
 const getLocalizedPosts = (locale?: string) => {
-  const targetLocale = locale && isLocale(locale) ? locale : DEFAULT_LOCALE
-  return allCoreContent(sortPosts(allBlogs)).filter((post) =>
-    (post.lang ?? 'en').toLowerCase().startsWith(targetLocale)
+  const targetLocale = normalizeLocale(locale)
+  return allCoreContent(sortPosts(allBlogs)).filter(
+    (post) => getDocumentLocale(post.lang) === targetLocale
   )
 }
 
@@ -25,7 +25,7 @@ export const generateStaticParams = async () => {
 
 export default async function Page(props: { params: Promise<{ page: string; locale?: string }> }) {
   const params = await props.params
-  const locale = params.locale && isLocale(params.locale) ? params.locale : DEFAULT_LOCALE
+  const locale = resolveLocaleParam(params)
   const posts = getLocalizedPosts(locale)
   const pageNumber = parseInt(params.page as string)
   const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE))

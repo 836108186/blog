@@ -14,7 +14,7 @@ import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { getSiteMetadata } from '@/lib/site'
 import { notFound } from 'next/navigation'
-import { DEFAULT_LOCALE, isLocale } from '@/lib/i18n'
+import { getDocumentLocale, normalizeLocale } from '@/lib/i18n'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -78,9 +78,9 @@ export async function generateMetadata(props: {
 }
 
 export const getBlogStaticParams = (locale?: string) => {
-  const targetLocale = locale && isLocale(locale) ? locale : DEFAULT_LOCALE
+  const targetLocale = normalizeLocale(locale)
   return allBlogs
-    .filter((post) => (post.lang ?? 'en').toLowerCase().startsWith(targetLocale))
+    .filter((post) => getDocumentLocale(post.lang) === targetLocale)
     .map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }
 
@@ -98,9 +98,9 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     return notFound()
   }
 
-  const targetLocale = (post.lang || 'en').toLowerCase().startsWith('zh') ? 'zh' : 'en'
-  const localeCoreContents = sortedCoreContents.filter((entry) =>
-    (entry.lang || 'en').toLowerCase().startsWith(targetLocale)
+  const targetLocale = getDocumentLocale(post.lang)
+  const localeCoreContents = sortedCoreContents.filter(
+    (entry) => getDocumentLocale(entry.lang) === targetLocale
   )
   const postIndex = localeCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {

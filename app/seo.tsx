@@ -7,12 +7,19 @@ interface PageSEOProps {
   title: string
   description?: string
   image?: string
+  locale?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
-export function genPageMetadata({ title, description, image, ...rest }: PageSEOProps): Metadata {
-  const localized = getSiteMetadata()
+export function genPageMetadata({
+  title,
+  description,
+  image,
+  locale,
+  ...rest
+}: PageSEOProps): Metadata {
+  const localized = getSiteMetadata(locale)
   return {
     title,
     description: description || localized.description,

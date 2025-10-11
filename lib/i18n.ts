@@ -15,8 +15,19 @@ export function isLocale(input?: string | null): input is Locale {
   return resolveLocaleToken(input) !== null
 }
 
-export function normalizeLocale(input?: string | null): Locale {
-  return resolveLocaleToken(input) ?? DEFAULT_LOCALE
+export function normalizeLocale(input?: string | null, fallback: Locale = DEFAULT_LOCALE): Locale {
+  return resolveLocaleToken(input) ?? fallback
+}
+
+export function resolveLocaleParam(
+  params?: { locale?: string | null } | null,
+  fallback: Locale = DEFAULT_LOCALE
+): Locale {
+  return normalizeLocale(params?.locale, fallback)
+}
+
+export function getDocumentLocale(input?: string | null): Locale {
+  return normalizeLocale(input, 'en')
 }
 
 export function getLocaleFromPath(pathname?: string | null): Locale {
@@ -49,4 +60,17 @@ export function localizePath(path: string, locale: Locale): string {
     return `/${locale}`
   }
   return `/${locale}${withoutLocale}`
+}
+
+export async function expandStaticParamsForLocales<T extends Record<string, unknown>>(
+  builder: (locale: Locale) => T[] | Promise<T[]>
+): Promise<Array<T & { locale: Locale }>> {
+  const results: Array<T & { locale: Locale }> = []
+  for (const locale of SUPPORTED_LOCALES) {
+    const entries = await builder(locale)
+    for (const params of entries) {
+      results.push({ ...params, locale })
+    }
+  }
+  return results
 }

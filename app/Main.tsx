@@ -7,11 +7,18 @@ import { useI18n } from '@/app/providers/I18nProvider'
 import { slug as slugify } from 'github-slugger'
 import tagData from 'app/tag-data.json'
 import { getTagLabel } from '@/data/tagsI18n'
+import { getDocumentLocale } from '@/lib/i18n'
 import { getSiteMetadata } from '@/lib/site'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { Blog } from 'contentlayer/generated'
 
 const MAX_DISPLAY = 5
 
-export default function Home({ posts }) {
+type HomeProps = {
+  posts: CoreContent<Blog>[]
+}
+
+export default function Home({ posts }: HomeProps) {
   // 计算标签计数与排序
   const { locale, t } = useI18n()
   const localizedSite = getSiteMetadata(locale)
@@ -19,7 +26,7 @@ export default function Home({ posts }) {
   const tagKeys = Object.keys(localizedTagCounts)
   const sortedTags = tagKeys.sort((a, b) => localizedTagCounts[b] - localizedTagCounts[a])
 
-  const filteredPosts = posts.filter((post) => (post.lang ?? 'en') === locale)
+  const filteredPosts = posts.filter((post) => getDocumentLocale(post.lang) === locale)
 
   return (
     <div className="flex flex-col xl:flex-row xl:space-x-24">

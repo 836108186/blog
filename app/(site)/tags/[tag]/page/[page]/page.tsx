@@ -4,14 +4,14 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
 import { notFound } from 'next/navigation'
-import { DEFAULT_LOCALE, isLocale } from '@/lib/i18n'
+import { getDocumentLocale, normalizeLocale, resolveLocaleParam } from '@/lib/i18n'
 
 const POSTS_PER_PAGE = 5
 
 const countsByLocale = tagData as Record<string, Record<string, number>>
 
 const getTagCounts = (locale?: string) => {
-  const targetLocale = locale && isLocale(locale) ? locale : DEFAULT_LOCALE
+  const targetLocale = normalizeLocale(locale)
   return countsByLocale[targetLocale] ?? {}
 }
 
@@ -38,10 +38,10 @@ export default async function TagPage(props: {
   const tag = decodeURI(params.tag)
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const pageNumber = parseInt(params.page)
-  const locale = params.locale && isLocale(params.locale) ? params.locale : DEFAULT_LOCALE
+  const locale = resolveLocaleParam(params)
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
-  ).filter((post) => (post.lang ?? 'en').toLowerCase().startsWith(locale))
+  ).filter((post) => getDocumentLocale(post.lang) === locale)
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE))
 
   // Return 404 for invalid page numbers or empty pages
