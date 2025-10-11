@@ -43,13 +43,23 @@ const icon = fromHtmlIsomorphic(
 )
 
 const SUPPORTED_CONTENT_LOCALES = ['zh', 'en']
+const BLOG_PATH_PREFIX = 'blog/'
+const DEFAULT_CONTENT_LOCALE = siteMetadata.defaultLocale?.toLowerCase().startsWith('zh') ? 'zh' : 'en'
+
+function isBlogDocument(doc: { _raw: { flattenedPath: string } }) {
+  return doc._raw.flattenedPath.startsWith(BLOG_PATH_PREFIX)
+}
 
 function resolveContentLocale(doc: { lang?: string | null; _raw: { flattenedPath: string } }) {
   const frontmatterLocale = typeof doc.lang === 'string' ? doc.lang.toLowerCase() : ''
   if (frontmatterLocale.startsWith('zh')) return 'zh'
   if (frontmatterLocale.startsWith('en')) return 'en'
 
-  const flattened = doc._raw.flattenedPath.replace(/^blog\//, '')
+  if (!isBlogDocument(doc)) {
+    return DEFAULT_CONTENT_LOCALE
+  }
+
+  const flattened = doc._raw.flattenedPath.slice(BLOG_PATH_PREFIX.length)
   const segments = flattened.split('/').filter(Boolean)
   if (segments.length > 0 && SUPPORTED_CONTENT_LOCALES.includes(segments[0].toLowerCase())) {
     return segments[0].toLowerCase()
@@ -58,7 +68,15 @@ function resolveContentLocale(doc: { lang?: string | null; _raw: { flattenedPath
 }
 
 function resolveSlugSegments(doc: { lang?: string | null; _raw: { flattenedPath: string } }) {
-  const flattened = doc._raw.flattenedPath.replace(/^blog\//, '')
+  if (!isBlogDocument(doc)) {
+    const segments = doc._raw.flattenedPath.split('/').filter(Boolean)
+    if (segments.length <= 1) {
+      return segments
+    }
+    return [segments[segments.length - 1]]
+  }
+
+  const flattened = doc._raw.flattenedPath.slice(BLOG_PATH_PREFIX.length)
   const segments = flattened.split('/').filter(Boolean)
   if (segments.length > 0 && SUPPORTED_CONTENT_LOCALES.includes(segments[0].toLowerCase())) {
     return segments.slice(1)
@@ -75,6 +93,10 @@ const computedFields: ComputedFields = {
   path: {
     type: 'string',
     resolve: (doc) => {
+      if (!isBlogDocument(doc)) {
+        return doc._raw.flattenedPath
+      }
+
       const locale = resolveContentLocale(doc)
       const slugSegments = resolveSlugSegments(doc)
       const slugPath = slugSegments.join('/')

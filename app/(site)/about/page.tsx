@@ -11,7 +11,12 @@ export function createAboutMetadata(locale?: string) {
 export const metadata = createAboutMetadata()
 
 export default function Page() {
-  const author = allAuthors.find((p) => p.slug === 'default') as Authors
+  const author = (allAuthors.find((p) => p.slug === 'default') ?? allAuthors[0]) as
+    | Authors
+    | undefined
+  if (!author) {
+    throw new Error('Author profile "default" is missing. Please add data/authors/default.mdx.')
+  }
   const mainContent = coreContent(author)
 
   return (
